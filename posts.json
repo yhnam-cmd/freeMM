@@ -1,108 +1,116 @@
-
 [
   {
     "id": "bingo-blitz",
     "title": "Bingo Blitz +4 freebies",
     "date": "2026-01-29",
-    "excerpt": "Collect daily gifts and bonus links. This post contains multiple reward links.",
+    "excerpt": "Collect daily gifts and bonus links. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["Bingo Blitz", "Other Games"],
     "tags": ["Bingo", "Coins", "Credits", "Freebies", "Gifts", "Slots"],
+    "ctaHref": "https://slotfreebies.com/bingo-blitz-free-credits/",
     "links": [
-      { "text": "Free Credits (New)", "url": "#" },
-      { "text": "Bonus Spins (Official)", "url": "#" },
-      { "text": "100 Freebies", "url": "#" },
-      { "text": "XP Boost Link", "url": "#" }
+      { "text": "Free Credits (New)", "url": "https://slotfreebies.com/bingo-blitz-free-credits/" },
+      { "text": "Bonus Spins (Official)", "url": "https://slotfreebies.com/bingo-blitz-free-credits/" },
+      { "text": "100 Freebies", "url": "https://slotfreebies.com/bingo-blitz-free-credits/" },
+      { "text": "XP Boost Link", "url": "https://slotfreebies.com/bingo-blitz-free-credits/" }
     ]
   },
   {
     "id": "bingo-bash",
     "title": "Bingo Bash 16+ free chips",
     "date": "2026-01-29",
-    "excerpt": "Daily chip drops via official promo links. Click to see the full list of rewards.",
+    "excerpt": "Daily chip drops via official promo links. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["Bingo Bash", "Other Games"],
     "tags": ["Bingo", "Chips", "Freebies", "Power Plays"],
+    "ctaHref": "https://slotfreebies.com/bingo-bash-free-chips/",
     "links": [
-      { "text": "16+ Free Chips", "url": "#" },
-      { "text": "Power Plays (Bonus)", "url": "#" }
+      { "text": "16+ Free Chips", "url": "https://slotfreebies.com/bingo-bash-free-chips/" },
+      { "text": "Power Plays (Bonus)", "url": "https://slotfreebies.com/bingo-bash-free-chips/" }
     ]
   },
   {
     "id": "house-of-fun",
     "title": "House of Fun 3,000+ free coins",
     "date": "2026-01-29",
-    "excerpt": "Stack coins for longer sessions. Now with a dedicated details page.",
+    "excerpt": "Stack coins for longer sessions. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["House of Fun Slots", "Slot Games"],
     "tags": ["Coins", "Free", "Freebies", "Slots"],
+    "ctaHref": "https://slotfreebies.com/house-of-fun-free-coins/",
     "links": [
-      { "text": "3,000+ Free Coins", "url": "#" },
-      { "text": "Spins & More", "url": "#" }
+      { "text": "3,000+ Free Coins", "url": "https://slotfreebies.com/house-of-fun-free-coins/" },
+      { "text": "Spins & More", "url": "https://slotfreebies.com/house-of-fun-free-coins/" }
     ]
   },
   {
     "id": "doubleu-slots",
     "title": "DoubleU Slots 280,000+ free chips",
     "date": "2026-01-29",
-    "excerpt": "Claim chips from rotating links inside the new post details page.",
+    "excerpt": "Claim chips from rotating links. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["DoubleU Slots", "Slot Games"],
     "tags": ["Chips", "Slots", "Freebies"],
+    "ctaHref": "https://slotfreebies.com/doubleu-casino-free-chips/",
     "links": [
-      { "text": "280,000+ Free Chips", "url": "#" }
+      { "text": "280,000+ Free Chips", "url": "https://slotfreebies.com/doubleu-casino-free-chips/" }
     ]
   },
   {
     "id": "jackpot-party",
     "title": "Jackpot Party 4k+ free coins",
     "date": "2026-01-29",
-    "excerpt": "Promo drops updated frequently. Click to see the list of coin links.",
+    "excerpt": "Promo drops updated frequently. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["Jackpot Party", "Slot Games"],
     "tags": ["Coins", "Slots", "Freebies"],
+    "ctaHref": "https://slotfreebies.com/jackpot-party-casino-free-coins/",
     "links": [
-      { "text": "4k+ Free Coins", "url": "#" },
-      { "text": "Lightning Leagues Bonus", "url": "#" }
+      { "text": "4k+ Free Coins", "url": "https://slotfreebies.com/jackpot-party-casino-free-coins/" },
+      { "text": "Lightning Leagues Bonus", "url": "https://slotfreebies.com/jackpot-party-casino-free-coins/" }
     ]
   },
   {
     "id": "quick-hit",
     "title": "Quick Hit 7,000+ free coins",
     "date": "2026-01-29",
-    "excerpt": "Sample excerpt. The details page shows all available reward links.",
+    "excerpt": "Sample excerpt. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["Quick Hit", "Slot Games"],
     "tags": ["Coins", "Slots", "Freebies"],
+    "ctaHref": "https://slotfreebies.com/quick-hit-casino-free-coins/",
      "links": [
-      { "text": "7,000+ Free Coins", "url": "#" }
+      { "text": "7,000+ Free Coins", "url": "https://slotfreebies.com/quick-hit-casino-free-coins/" }
     ]
   },
   {
     "id": "heart-of-vegas",
     "title": "Heart of Vegas 15,000+ free coins",
     "date": "2026-01-28",
-    "excerpt": "More placeholder content for the new details page.",
+    "excerpt": "More placeholder content. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["Heart of Vegas", "Slot Games"],
     "tags": ["Coins", "Freebies", "Slots"],
+    "ctaHref": "https://slotfreebies.com/heart-of-vegas-free-coins/",
     "links": [
-      { "text": "15,000+ Free Coins", "url": "#" }
+      { "text": "15,000+ Free Coins", "url": "https://slotfreebies.com/heart-of-vegas-free-coins/" }
     ]
   },
     {
     "id": "wizard-of-oz",
     "title": "Wizard of Oz 1.5M+ free credits",
     "date": "2026-01-28",
-    "excerpt": "Credits claim page stub, now inside the app.",
+    "excerpt": "Credits claim page stub. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["Wizard of Oz", "Slot Games"],
     "tags": ["Credits", "Freebies", "Slots"],
+    "ctaHref": "https://slotfreebies.com/wizard-of-oz-slots-free-credits/",
     "links": [
-      { "text": "1.5M+ Free Credits", "url": "#" }
+      { "text": "1.5M+ Free Credits", "url": "https://slotfreebies.com/wizard-of-oz-slots-free-credits/" }
     ]
   },
   {
     "id": "hit-it-rich",
     "title": "Hit It Rich 400k+ free coins",
     "date": "2026-01-27",
-    "excerpt": "Coins claim page stub, now inside the app.",
+    "excerpt": "Coins claim page stub. Redirects to the official freebies page on slotfreebies.com.",
     "categories": ["Hit It Rich", "Slot Games"],
     "tags": ["Coins", "Freebies", "Slots"],
+    "ctaHref": "https://slotfreebies.com/hit-it-rich-casino-slots-free-coins/",
     "links": [
-      { "text": "400,000+ Free Coins", "url": "#" }
+      { "text": "400,000+ Free Coins", "url": "https://slotfreebies.com/hit-it-rich-casino-slots-free-coins/" }
     ]
   }
 ]
