@@ -1,132 +1,101 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Freebies Hub</title>
-  <meta name="description" content="Daily freebies links for social casino & casual games." />
-  <link href="/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
 </head>
 <body>
 
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="navwrap">
-      <a class="brand" href="#" aria-label="Home">
-        <div class="logo">SF</div>
-        <div>Freebies Hub</div>
-      </a>
-
-      <button class="burger" id="burger" aria-label="Toggle navigation">☰</button>
-
-      <nav class="nav" id="nav">
-        <a class="active" href="#" data-route="home">Home</a>
-        <a href="#" data-route="games">Games</a>
-        <a href="#" data-route="search">Search</a>
-        <a href="#" data-route="latest">Latest</a>
-        <a href="#" data-route="about">About</a>
-        <a href="#" data-route="cookie">Cookie Policy</a>
-      </nav>
-
-      <div class="nav-right" style="width:100%; max-width:460px;">
-        <div class="searchbox" title="Filter posts by title/category/tag">
-          <span aria-hidden="true">🔎</span>
-          <input id="q" type="search" placeholder="Search freebies..." autocomplete="off" />
-        </div>
-        <div class="pill" id="countPill">0 posts</div>
+  <header class="header">
+    <div class="logo">
+      <a href="#" onclick="routeTo('home'); return false;"><span>SF</span> Freebies Hub</a>
+    </div>
+    <nav id="nav" class="nav">
+      <a href="#" data-route="home" class="active" onclick="routeTo('home'); return false;">Home</a>
+      <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
+      <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
+      <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
+      <a href="#" data-route="about" onclick="routeTo('about'); return false;">About</a>
+      <a href="#" data-route="cookie" onclick="routeTo('cookie'); return false;">Cookie Policy</a>
+    </nav>
+    <div class="header-right">
+      <div class="search-container">
+        <input type="search" id="q" placeholder="Search freebies..." autocomplete="off">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
       </div>
+      <div id="countPill" class="count-pill">...</div>
+      <button id="burger" class="burger" aria-label="Toggle mobile navigation">☰</button>
     </div>
   </header>
 
-  <!-- Main layout -->
   <main class="container">
-    <!-- Left: feed -->
-    <section>
-      <div id="feed"></div>
+    <div class="content-area">
 
-      <div class="pager" id="pager" aria-label="Pagination"></div>
-    </section>
+        <!-- View 1: Feed/List of Posts -->
+        <div id="feed-view">
+            <div id="feed" class="feed"></div>
+            <nav id="pager" class="pager"></nav>
+        </div>
 
-    <!-- Right: sidebar -->
+        <!-- View 2: Single Post Details -->
+        <div id="post-view" style="display: none;">
+            <!-- Content will be injected by JavaScript -->
+        </div>
+
+    </div>
+
     <aside class="sidebar">
       <div class="widget">
-        <div class="heroimg" role="img" aria-label="Sidebar banner image"></div>
-        <div class="w-body">
-          <div style="font-weight:900; margin-bottom:6px;">Popular Freebies</div>
-          <div class="small" style="color:var(--muted); font-size:13px;">
-            Quick links by game category. Replace with your real taxonomy.
-          </div>
-        </div>
+        <h3 class="widget-title">Popular Freebies</h3>
+        <ul id="popularList" class="widget-list"></ul>
       </div>
-
       <div class="widget">
-        <div class="w-head">Popular Freebies</div>
-        <div class="w-body">
-          <ul class="list" id="popularList"></ul>
-        </div>
+        <h3 class="widget-title">Trending Freebies</h3>
+        <ul id="trendingList" class="widget-list"></ul>
       </div>
-
       <div class="widget">
-        <div class="w-head">Trending Freebies</div>
-        <div class="w-body">
-          <ul class="list" id="trendingList"></ul>
-        </div>
-      </div>
-
-      <div class="widget">
-        <div class="w-head">Share</div>
-        <div class="w-body">
-          <div class="small">Social share placeholder (cookie-consent dependent).</div>
-          <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
-            <a class="tag" href="#" onclick="alert('Share stub'); return false;">Facebook</a>
-            <a class="tag" href="#" onclick="alert('Share stub'); return false;">X</a>
-            <a class="tag" href="#" onclick="alert('Share stub'); return false;">Reddit</a>
-          </div>
+        <h3 class="widget-title">Share</h3>
+        <p class="widget-text">Social share placeholder (cookie-consent dependent).</p>
+        <div class="share-buttons">
+          <a href="#" class="share-btn">Facebook</a>
+          <a href="#" class="share-btn">X</a>
+          <a href="#" class="share-btn">Reddit</a>
         </div>
       </div>
     </aside>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footwrap">
-      <div>
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
         <h4>Freebies Hub Info</h4>
-        <div class="small">
-          Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.
-        </div>
+        <p>Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.</p>
       </div>
-
-      <div>
+      <div class="footer-col">
         <h4>Info</h4>
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <a href="#" onclick="routeTo('home'); return false;">Home</a>
-          <a href="#" onclick="routeTo('about'); return false;">About</a>
-          <a href="#" onclick="routeTo('latest'); return false;">Latest</a>
-          <a href="#" onclick="routeTo('cookie'); return false;">Cookie Policy</a>
-        </div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="routeTo('home'); return false;">Home</a></li>
+          <li><a href="#" onclick="routeTo('about'); return false;">About</a></li>
+          <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
+          <li><a href="#" onclick="routeTo('cookie'); return false;">Cookie Policy</a></li>
+        </ul>
       </div>
-
-      <div>
+      <div class="footer-col">
         <h4>Popular Games</h4>
-        <div style="display:flex; flex-direction:column; gap:8px;" id="footerPopular"></div>
+        <div id="footerPopular" class="footer-tags"></div>
       </div>
-
-      <div>
+      <div class="footer-col">
         <h4>Latest Game Freebies</h4>
-        <div style="display:flex; flex-direction:column; gap:8px;" id="footerLatest"></div>
+        <div id="footerLatest" class="footer-tags"></div>
       </div>
     </div>
-
-    <div class="copyright">
-      <div>© <span id="year"></span> Freebies Hub</div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="#" onclick="alert('Privacy stub'); return false;">Privacy</a>
-        <a href="#" onclick="alert('Disclaimer stub'); return false;">Disclaimer</a>
-      </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Your Company. All rights reserved.</p>
     </div>
   </footer>
 
-  <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
