@@ -1,1 +1,240 @@
-// ---------- App State ----------\nlet allPosts = [];\nlet filtered = [];\nlet page = 1;\nconst pageSize = 6;\nlet scrollPosition = 0;\n\n// ---------- Views ----------\nconst $ = (s) => document.querySelector(s);\nconst $feedView = $(\"#feed-view\");\nconst $postView = $(\"#post-view\");\nconst $featuredGame = $(\"#featured-game\");\nconst $container = $(\".container\");\n\n// ---------- Utilities ----------\nconst escapeHtml = (str) =>\n  String(str || '').replace(/[&<>\"']/g, (tag) => ({\n    \"&\": \"&amp;\",\n    \"<\": \"&lt;\",\n    \">\": \"&gt;\",\n    \'\"\': \'&quot;\',\n    \"\'\": \"&#039;\",\n  }[tag]));\n\nfunction formatDateParts(iso) {\n  const d = new Date(iso + \"T00:00:00\");\n  return {\n    mon: d.toLocaleString(\"en-US\", { month: \"short\" }),\n    day: String(d.getDate()).padStart(2, \"0\"),\n    year: d.getFullYear(),\n  };\n}\n\n// ---------- Data Loading ----------\nasync function loadData() {\n  try {\n    const res = await fetch(\'posts.json\');\n    if (!res.ok) throw new Error(`Failed to load posts: ${res.statusText}`);\n    allPosts = await res.json();\n  } catch (e) {\n    console.error(\"Data loading error:\", e);\n    $container.innerHTML = `<p class=\\\"error\\\">Failed to load content. Please try again later.</p>`;\n  }\n}\n\n// ---------- Rendering ----------\nfunction renderFeaturedGame() {\n  const featuredPost = filtered[0];\n  if (!featuredPost) {\n    $featuredGame.style.display = \'none\';\n    return;\n  }\n\n  $featuredGame.style.backgroundImage = `url(${escapeHtml(featuredPost.image)})`;\n  $featuredGame.innerHTML = `\n    <div class=\"featured-content\">\n        <h2 class=\"featured-title\">${escapeHtml(featuredPost.title)}</h2>\n        <p class=\"featured-excerpt\">${escapeHtml(featuredPost.excerpt)}</p>\n        <a href=\"#\" class=\"featured-btn\" onclick=\"routeTo(\'post\', { id: \'${featuredPost.id}\' }); return false;\">View Rewards →</a>\n    </div>\n  `;\n  $featuredGame.style.display = \'block\';\n}\n\nfunction renderFeed() {\n  const total = filtered.length;\n  const totalPages = Math.max(1, Math.ceil(total / pageSize));\n  page = Math.min(page, totalPages);\n\n  const start = (page - 1) * pageSize;\n  const items = filtered.slice(start, start + pageSize);\n\n  $(\"#countPill\").textContent = `${total} posts`;\n\n  $(\"#feed-container\").innerHTML = items.map(p => {\n    const { mon, day, year } = formatDateParts(p.date);\n    const cats = (p.categories || []).map(c => `<a href=\\\"#\\\" onclick=\\\"filterBy(\'${escapeHtml(c)}\');return false;\\\">${escapeHtml(c)}</a>`).join(\", \");\n\n    return `\n      <article class=\\\"post\\\">\n        <div class=\\\"datebox\\\" aria-label=\\\"Post date\\\">\n          <div class=\\\"mon\\\">${escapeHtml(mon)}</div>\n          <div class=\\\"day\\\">${escapeHtml(day)}</div>\n          <div class=\\\"year\\\">${escapeHtml(String(year))}</div>\n        </div>\n        <div>\n          <h2><a href=\\\"#\\\" onclick=\\\"routeTo(\'post\', { id: \'${p.id}\' });return false;\\\">${escapeHtml(p.title)}</a></h2>\n          <p class=\\\"excerpt\\\">${escapeHtml(p.excerpt)}</p>\n          <div class=\\\"meta\\\">Posted in ${cats}</div>\n        </div>\n      </article>\n    `;\n  }).join(\"\");\n\n  renderPager(totalPages);\n}\n\nfunction renderPager(totalPages) {\n  let pages = [];\n  for (let i = 1; i <= totalPages; i++) {\n    pages.push(`<a class=\\\"page ${i === page ? \'active\' : \'\'}\\\" href=\\\"#\\\" onclick=\\\"gotoPage(${i});return false;\\\">${i}</a>`);\n  }\n  const next = page < totalPages ? `<a class=\\\"page\\\" href=\\\"#\\\" onclick=\\\"gotoPage(${page + 1});return false;\\\">Next »</a>` : \"\";\n  $(\"#pager\").innerHTML = pages.join(\"\") + (next ? ` <span style=\\\"flex:1\\\"></span> ${next}` : \"\");\n}\n\nfunction renderPostDetail(id) {\n  const post = allPosts.find(p => p.id === id);\n  if (!post) {\n    $postView.innerHTML = `<p class=\\\"error\\\">Post not found.</p><button class=\\\"btn-back\\\" onclick=\\\"routeTo(\'home\');\\\">← Back to list</button>`;\n    return;\n  }\n\n  const { mon, day, year } = formatDateParts(post.date);\n  const links = (post.links || []).map(link =>\n    `<li><a href=\\\"#\\\" onclick=\\\"window.open(\'${escapeHtml(link.url)}\', \'_blank\')\\\" class=\\\"btn-link\\\">${escapeHtml(link.text)} <span aria-hidden=\\\"true\\\">→</span></a></li>`\n  ).join(\"\");\n\n  $postView.innerHTML = `\n    <article class=\\\"post-full\\\">\n      <button class=\\\"btn-back\\\" onclick=\\\"routeTo(\'home\');\\\">← Back to list</button>\n      <h1>${escapeHtml(post.title)}</h1>\n      <div class=\\\"meta-full\\\">Published on ${mon} ${day}, ${year}</div>\n      <div class=\\\"post-body\\\">\n        <p>${escapeHtml(post.excerpt)}</p>\n        <h3>Available Rewards:</h3>\n        <ul class=\\\"reward-links\\\">${links.length > 0 ? links : \'<li>No reward links available yet.</li>\'}</ul>\n        <div style=\\\"margin-top: 24px; text-align: center;\\\"><a href=\\\"#\\\" onclick=\\\"window.open(\'${escapeHtml(post.ctaHref)}\', \'_blank\')\\\" class=\\\"featured-btn\\\">Visit Official Site</a></div>\n      </div>\n    </article>\n  `;\n}\n\nfunction renderSidebar() {\n    const categories = {};\n    const tags = new Set();\n\n    allPosts.forEach(post => {\n        (post.categories || []).forEach(cat => {\n            categories[cat] = (categories[cat] || 0) + 1;\n        });\n        (post.tags || []).forEach(tag => tags.add(tag));\n    });\n\n    const sortedCategories = Object.entries(categories).sort((a, b) => b[1] - a[1]);\n\n    $(\'#widget-categories\').innerHTML = sortedCategories.map(([name, count]) =>\n        `<a href=\"#\" onclick=\"filterBy(\'${escapeHtml(name)}\');return false;\">\n            <span>${escapeHtml(name)}</span>\n            <span>${count}</span>\n        </a>`\n    ).join(\'\');\n\n    $(\'#widget-tags\').innerHTML = Array.from(tags).sort().map(tag =>\n        `<a href=\"#\" onclick=\"filterBy(\'${escapeHtml(tag)}\');return false;\">${escapeHtml(tag)}</a>`\n    ).join(\'\');\n}\n\n// ---------- Routing / Navigation ----------\nfunction routeTo(route, params = {}) {\n  document.querySelectorAll(\".nav a\").forEach(a => a.classList.remove(\"active\"));\n  const activeRoute = route === \'post\' ? \'home\' : route;\n  const activeLink = $(\`.nav a[data-route=\'${activeRoute}\']\`);\n  if (activeLink) activeLink.classList.add(\"active\");\n\n  if (route === \'post\') {\n    scrollPosition = window.scrollY;\n    $feedView.style.display = \'none\';\n    $featuredGame.style.display = \'none\';\n    $postView.style.display = \'block\';\n    renderPostDetail(params.id);\n    window.scrollTo(0, 0);\n  } else {\n    $feedView.style.display = \'block\';\n    $postView.style.display = \'none\';\n    handleFeedRoute(route);\n    window.scrollTo(0, scrollPosition);\n    scrollPosition = 0;\n  }\n}\nwindow.routeTo = routeTo;\n\nfunction handleFeedRoute(route) {\n  switch (route) {\n    case \'latest\':\n      filtered = [...allPosts].sort((a, b) => new Date(b.date) - new Date(a.date));\n      break;\n    case \'home\':\n    default:\n      // Default sort: posts with links first, then by date\n      filtered = [...allPosts].sort((a, b) => {\n        const aHasRealLinks = a.links && a.links.length > 0 && a.links.some(l => l.url !== \'#\');\n        const bHasRealLinks = b.links && b.links.length > 0 && b.links.some(l => l.url !== \'#\');\n        if (aHasRealLinks && !bHasRealLinks) return -1;\n        if (!aHasRealLinks && bHasRealLinks) return 1;\n        return new Date(b.date) - new Date(a.date);\n      });\n      break;\n  }\n  page = 1;\n  $(\"#q\").value = \"\";\n  renderFeed();\n  renderFeaturedGame();\n}\n\nfunction gotoPage(p) {\n  page = p;\n  renderFeed();\n  window.scrollTo(0, 0);\n}\nwindow.gotoPage = gotoPage;\n\nfunction filterBy(token) {\n  $(\"#q\").value = token;\n  applySearch(token);\n  routeTo(\'home\');\n}\nwindow.filterBy = filterBy;\n\nfunction applySearch(query) {\n  const q = (query || \"\").trim().toLowerCase();\n  filtered = allPosts.filter(p => {\n    const hay = [p.title, p.excerpt, ...(p.categories || []), ...(p.tags || [])].join(\" \").toLowerCase();\n    return hay.includes(q);\n  });\n  page = 1;\n  renderFeed();\n  renderFeaturedGame();\n}\n\n// ---------- Init & Event Listeners ----------\nasync function init() {\n  $(\"#burger\").addEventListener(\"click\", () => $(\"#nav\").classList.toggle(\"open\"));\n  $(\"#q\").addEventListener(\"input\", e => applySearch(e.target.value));\n  $(\"#year\").textContent = new Date().getFullYear();\n\n  await loadData();\n  \n  // Set initial route to home, which applies the correct sorting\n  routeTo(\'home\');\n  renderSidebar();\n}\n\ndocument.addEventListener(\"DOMContentLoaded\", init);\n
+// ---------- App State ----------
+let allPosts = [];
+let filtered = [];
+let page = 1;
+const pageSize = 6;
+let scrollPosition = 0;
+
+// ---------- Views ----------
+const $ = (s) => document.querySelector(s);
+const $feedView = $("#feed-view");
+const $postView = $("#post-view");
+const $featuredGame = $("#featured-game");
+const $container = $(".container");
+
+// ---------- Utilities ----------
+const escapeHtml = (str) =>
+  String(str || '')
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+function formatDateParts(iso) {
+  const d = new Date(iso + "T00:00:00");
+  return {
+    mon: d.toLocaleString("en-US", { month: "short" }),
+    day: String(d.getDate()).padStart(2, "0"),
+    year: d.getFullYear(),
+  };
+}
+
+// ---------- Data Loading ----------
+async function loadData() {
+  try {
+    const res = await fetch('posts.json');
+    if (!res.ok) throw new Error(`Failed to load posts: ${res.statusText}`);
+    allPosts = await res.json();
+  } catch (e) {
+    console.error("Data loading error:", e);
+    $container.innerHTML = `<p class=\"error\">Failed to load content. Please try again later.</p>`;
+  }
+}
+
+// ---------- Rendering ----------
+function renderFeaturedGame() {
+  const featuredPost = filtered[0];
+  if (!featuredPost) {
+    $featuredGame.style.display = 'none';
+    return;
+  }
+
+  $featuredGame.style.backgroundImage = `url(${escapeHtml(featuredPost.image)})`;
+  $featuredGame.innerHTML = `
+    <div class=\"featured-content\">
+        <h2 class=\"featured-title\">${escapeHtml(featuredPost.title)}</h2>
+        <p class=\"featured-excerpt\">${escapeHtml(featuredPost.excerpt)}</p>
+        <a href=\"#\" class=\"featured-btn\" onclick=\"routeTo('post', { id: '${featuredPost.id}' }); return false;\">View Rewards →</a>
+    </div>
+  `;
+  $featuredGame.style.display = 'block';
+}
+
+function renderFeed() {
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  page = Math.min(page, totalPages);
+
+  const start = (page - 1) * pageSize;
+  const items = filtered.slice(start, start + pageSize);
+
+  $("#countPill").textContent = `${total} posts`;
+
+  $("#feed-container").innerHTML = items.map(p => {
+    const { mon, day, year } = formatDateParts(p.date);
+    const cats = (p.categories || []).map(c => `<a href=\"#\" onclick=\"filterBy('${escapeHtml(c)}');return false;\">${escapeHtml(c)}</a>`).join(", ");
+
+    return `
+      <article class=\"post\">
+        <div class=\"datebox\" aria-label=\"Post date\">
+          <div class=\"mon\">${escapeHtml(mon)}</div>
+          <div class=\"day\">${escapeHtml(day)}</div>
+          <div class=\"year\">${escapeHtml(String(year))}</div>
+        </div>
+        <div>
+          <h2><a href=\"#\" onclick=\"routeTo('post', { id: '${p.id}' });return false;\">${escapeHtml(p.title)}</a></h2>
+          <p class=\"excerpt\">${escapeHtml(p.excerpt)}</p>
+          <div class=\"meta\">Posted in ${cats}</div>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  renderPager(totalPages);
+}
+
+function renderPager(totalPages) {
+  let pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(`<a class=\"page ${i === page ? 'active' : ''}\" href=\"#\" onclick=\"gotoPage(${i});return false;\">${i}</a>`);
+  }
+  const next = page < totalPages ? `<a class=\"page\" href=\"#\" onclick=\"gotoPage(${page + 1});return false;\">Next »</a>` : "";
+  $("#pager").innerHTML = pages.join("") + (next ? ` <span style=\"flex:1\"></span> ${next}` : "");
+}
+
+function renderPostDetail(id) {
+  const post = allPosts.find(p => p.id === id);
+  if (!post) {
+    $postView.innerHTML = `<p class=\"error\">Post not found.</p><button class=\"btn-back\" onclick=\"routeTo('home');\">← Back to list</button>`;
+    return;
+  }
+
+  const { mon, day, year } = formatDateParts(post.date);
+  const links = (post.links || []).map(link =>
+    `<li><a href=\"#\" onclick=\"window.open('${escapeHtml(link.url)}', '_blank')\" class=\"btn-link\">${escapeHtml(link.text)} <span aria-hidden=\"true\">→</span></a></li>`
+  ).join("");
+
+  $postView.innerHTML = `
+    <article class=\"post-full\">
+      <button class=\"btn-back\" onclick=\"routeTo('home');\">← Back to list</button>
+      <h1>${escapeHtml(post.title)}</h1>
+      <div class=\"meta-full\">Published on ${mon} ${day}, ${year}</div>
+      <div class=\"post-body\">
+        <p>${escapeHtml(post.excerpt)}</p>
+        <h3>Available Rewards:</h3>
+        <ul class=\"reward-links\">${links.length > 0 ? links : '<li>No reward links available yet.</li>'}</ul>
+        <div style=\"margin-top: 24px; text-align: center;\"><a href=\"#\" onclick=\"window.open('${escapeHtml(post.ctaHref)}', '_blank')\" class=\"featured-btn\">Visit Official Site</a></div>
+      </div>
+    </article>
+  `;
+}
+
+function renderSidebar() {
+    const categories = {};
+    const tags = new Set();
+
+    allPosts.forEach(post => {
+        (post.categories || []).forEach(cat => {
+            categories[cat] = (categories[cat] || 0) + 1;
+        });
+        (post.tags || []).forEach(tag => tags.add(tag));
+    });
+
+    const sortedCategories = Object.entries(categories).sort((a, b) => b[1] - a[1]);
+
+    $('#widget-categories').innerHTML = sortedCategories.map(([name, count]) =>
+        `<a href=\"#\" onclick=\"filterBy('${escapeHtml(name)}');return false;\">\n            <span>${escapeHtml(name)}</span>\n            <span>${count}</span>\n        </a>`
+    ).join('');
+
+    $('#widget-tags').innerHTML = Array.from(tags).sort().map(tag =>
+        `<a href=\"#\" onclick=\"filterBy('${escapeHtml(tag)}');return false;\">${escapeHtml(tag)}</a>`
+    ).join('');
+}
+
+// ---------- Routing / Navigation ----------
+function routeTo(route, params = {}) {
+  document.querySelectorAll(".nav a").forEach(a => a.classList.remove("active"));
+  const activeRoute = route === 'post' ? 'home' : route;
+  const activeLink = $(`.nav a[data-route='${activeRoute}']`);
+  if (activeLink) activeLink.classList.add("active");
+
+  if (route === 'post') {
+    scrollPosition = window.scrollY;
+    $feedView.style.display = 'none';
+    $featuredGame.style.display = 'none';
+    $postView.style.display = 'block';
+    renderPostDetail(params.id);
+    window.scrollTo(0, 0);
+  } else {
+    $feedView.style.display = 'block';
+    $postView.style.display = 'none';
+    handleFeedRoute(route);
+    window.scrollTo(0, scrollPosition);
+    scrollPosition = 0;
+  }
+}
+window.routeTo = routeTo;
+
+function handleFeedRoute(route) {
+  switch (route) {
+    case 'latest':
+      filtered = [...allPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+      break;
+    case 'home':
+    default:
+      // Default sort: posts with links first, then by date
+      filtered = [...allPosts].sort((a, b) => {
+        const aHasRealLinks = a.links && a.links.length > 0 && a.links.some(l => l.url !== '#');
+        const bHasRealLinks = b.links && b.links.length > 0 && b.links.some(l => l.url !== '#');
+        if (aHasRealLinks && !bHasRealLinks) return -1;
+        if (!aHasRealLinks && bHasRealLinks) return 1;
+        return new Date(b.date) - new Date(a.date);
+      });
+      break;
+  }
+  page = 1;
+  $("#q").value = "";
+  renderFeed();
+  renderFeaturedGame();
+}
+
+function gotoPage(p) {
+  page = p;
+  renderFeed();
+  window.scrollTo(0, 0);
+}
+window.gotoPage = gotoPage;
+
+function filterBy(token) {
+  $("#q").value = token;
+  applySearch(token);
+  routeTo('home');
+}
+window.filterBy = filterBy;
+
+function applySearch(query) {
+  const q = (query || "").trim().toLowerCase();
+  filtered = allPosts.filter(p => {
+    const hay = [p.title, p.excerpt, ...(p.categories || []), ...(p.tags || [])].join(" ").toLowerCase();
+    return hay.includes(q);
+  });
+  page = 1;
+  renderFeed();
+  renderFeaturedGame();
+}
+
+// ---------- Init & Event Listeners ----------
+async function init() {
+  $("#burger").addEventListener("click", () => $("#nav").classList.toggle("open"));
+  $("#q").addEventListener("input", e => applySearch(e.target.value));
+  $("#year").textContent = new Date().getFullYear();
+
+  await loadData();
+  
+  // Set initial route to home, which applies the correct sorting
+  routeTo('home');
+  renderSidebar();
+}
+
+document.addEventListener("DOMContentLoaded", init);
