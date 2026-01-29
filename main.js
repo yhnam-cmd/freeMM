@@ -1,1 +1,274 @@
-// ---------- Sample data (replace with CMS / API) ----------\n    const posts = [\n      {\n        title: \"Bingo Blitz +4 freebies\",\n        date: \"2026-01-29\",\n        excerpt: \"Collect daily gifts and bonus links. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"Bingo Blitz\", \"Other Games\"],\n        tags: [\"Bingo\", \"Coins\", \"Credits\", \"Freebies\", \"Gifts\", \"Slots\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/bingo-blitz-free-credits/\",\n      },\n      {\n        title: \"Bingo Bash 16+ free chips\",\n        date: \"2026-01-29\",\n        excerpt: \"Daily chip drops via official promo links. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"Bingo Bash\", \"Other Games\"],\n        tags: [\"Bingo\", \"Chips\", \"Freebies\", \"Power Plays\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/bingo-bash-free-chips/\",\n      },\n      {\n        title: \"House of Fun 3,000+ free coins\",\n        date: \"2026-01-29\",\n        excerpt: \"Stack coins for longer sessions. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"House of Fun Slots\", \"Slot Games\"],\n        tags: [\"Coins\", \"Free\", \"Freebies\", \"Slots\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/house-of-fun-free-coins/\",\n      },\n      {\n        title: \"DoubleU Slots 280,000+ free chips\",\n        date: \"2026-01-29\",\n        excerpt: \"Claim chips from rotating links. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"DoubleU Slots\", \"Slot Games\"],\n        tags: [\"Chips\", \"Slots\", \"Freebies\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/doubleu-casino-free-chips/\",\n      },\n      {\n        title: \"Jackpot Party 4k+ free coins\",\n        date: \"2026-01-29\",\n        excerpt: \"Promo drops updated frequently. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"Jackpot Party\", \"Slot Games\"],\n        tags: [\"Coins\", \"Slots\", \"Freebies\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/jackpot-party-casino-free-coins/\",\n      },\n      {\n        title: \"Quick Hit 7,000+ free coins\",\n        date: \"2026-01-29\",\n        excerpt: \"Sample excerpt. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"Quick Hit\", \"Slot Games\"],\n        tags: [\"Coins\", \"Slots\", \"Freebies\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/quick-hit-casino-free-coins/\",\n      },\n      {\n        title: \"Heart of Vegas 15,000+ free coins\",\n        date: \"2026-01-28\",\n        excerpt: \"More placeholder content. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"Heart of Vegas\", \"Slot Games\"],\n        tags: [\"Coins\", \"Freebies\", \"Slots\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/heart-of-vegas-free-coins/\",\n      },\n      {\n        title: \"Wizard of Oz 1.5M+ free credits\",\n        date: \"2026-01-28\",\n        excerpt: \"Credits claim page stub. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"Wizard of Oz\", \"Slot Games\"],\n        tags: [\"Credits\", \"Freebies\", \"Slots\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/wizard-of-oz-slots-free-credits/\",\n      },\n      {\n        title: \"Hit It Rich 400k+ free coins\",\n        date: \"2026-01-27\",\n        excerpt: \"Coins claim page stub. Redirects to the official freebies page on slotfreebies.com.\",\n        categories: [\"Hit It Rich\", \"Slot Games\"],\n        tags: [\"Coins\", \"Freebies\", \"Slots\"],\n        ctaText: \"Collect Freebies\",\n        ctaHref: \"https://slotfreebies.com/hit-it-rich-casino-slots-free-coins/\",\n      },\n    ];\n\n    const popular = [\n      \"Bingo Bash\",\"Bingo Blitz\",\"Caesars Slots\",\"Cash Frenzy\",\"Cashman Slots\",\"DoubleDown Slots\",\n      \"DoubleU Slots\",\"Heart of Vegas\",\"House of Fun\",\"Jackpot Party\",\"Quick Hit\",\"Slotomania\"\n    ];\n\n    const trending = [\n      \"Big Fish Slots\",\"Club Vegas\",\"Coin Master\",\"GSN Slots\",\"Jackpot World\",\"Lotsa Slots\",\n      \"Monopoly Go\",\"My Konami Slots\",\"Scatter Slots\",\"UNO\",\"Willy Wonka\"\n    ];\n\n    // ---------- Utilities ----------\n    const $ = (s) => document.querySelector(s);\n    const escapeHtml = (str) =>\n      str.replaceAll(\"&\",\"&amp;\").replaceAll(\"<\",\"&lt;\").replaceAll(\">\",\"&gt;\")\n         .replaceAll(\'\"\',\"&quot;\").replaceAll(\"\'\",\"&#039;\");\n\n    function formatDateParts(iso){\n      const d = new Date(iso + \"T00:00:00\");\n      const mon = d.toLocaleString(\"en-US\", { month:\"short\" });\n      const day = String(d.getDate()).padStart(2,\"0\");\n      const year = d.getFullYear();\n      return { mon, day, year };\n    }\n\n    // ---------- Feed rendering + pagination ----------\n    let page = 1;\n    const pageSize = 6;\n    let filtered = [...posts];\n\n    function render(){\n      // slice page\n      const total = filtered.length;\n      const totalPages = Math.max(1, Math.ceil(total / pageSize));\n      page = Math.min(page, totalPages);\n\n      const start = (page - 1) * pageSize;\n      const items = filtered.slice(start, start + pageSize);\n\n      $(\"#countPill\").textContent = `${total} posts`;\n\n      $(\"#feed\").innerHTML = items.map(p => {\n        const { mon, day, year } = formatDateParts(p.date);\n        const cats = p.categories.map(c => `<a href=\"#\" onclick=\"filterBy(\'${escapeHtml(c)}\');return false;\">${escapeHtml(c)}</a>`).join(\", \");\n        const tags = p.tags.map(t => `<a class=\"tag\" href=\"#\" onclick=\"filterBy(\'${escapeHtml(t)}\');return false;\">${escapeHtml(t)}</a>`).join(\"\");\n\n        return `\n          <article class=\"post\">\n            <div class=\"datebox\" aria-label=\"Post date\">\n              <div class=\"mon\">${escapeHtml(mon)}</div>\n              <div class=\"day\">${escapeHtml(day)}</div>\n              <div class=\"year\">${escapeHtml(String(year))}</div>\n            </div>\n\n            <div>\n              <h2><a href=\"#\" onclick=\"alert(\'Open post stub\');return false;\">${escapeHtml(p.title)}</a></h2>\n              <p class=\"excerpt\">${escapeHtml(p.excerpt)}</p>\n\n              <div class=\"cta-row\">\n                <button class=\"btn\" onclick=\"window.open(\'${p.ctaHref}\', \'_blank\')\">\n                  ${escapeHtml(p.ctaText)} <span aria-hidden=\"true\">→</span>\n                </button>\n                <div class=\"meta\">\n                  Posted in ${cats}\n                </div>\n              </div>\n\n              <div class=\"tags\" aria-label=\"Tags\">\n                ${tags}\n              </div>\n            </div>\n          </article>\n        `;\n      }).join(\"\");\n\n      // pager\n      const pages = [];\n      for(let i=1;i<=totalPages;i++){\n        pages.push(`<a class=\"page ${i===page?\'active\':\'\'}\" href=\"#\" onclick=\"gotoPage(${i});return false;\">${i}</a>`);\n      }\n      const next = page < totalPages\n        ? `<a class=\"page\" href=\"#\" onclick=\"gotoPage(${page+1});return false;\">Next »</a>`\n        : \"\";\n\n      $(\"#pager\").innerHTML = pages.join(\"\") + (next ? ` <span style=\"flex:1\"></span> ${next}` : \"\");\n    }\n\n    function gotoPage(p){ page = p; render(); window.scrollTo(0, 0); }\n    function filterBy(token){\n      const t = token.toLowerCase();\n      $(\"#q\").value = token;\n      applySearch(t);\n    }\n\n    function applySearch(q){\n      const query = (q || \"\").trim().toLowerCase();\n      filtered = posts.filter(p => {\n        const hay = [\n          p.title, p.excerpt,\n          ...(p.categories||[]),\n          ...(p.tags||[])\n        ].join(\" \").toLowerCase();\n        return hay.includes(query);\n      });\n      page = 1;\n      render();\n      hydrateFooter();\n    }\n\n    // ---------- Sidebar lists ----------\n    function renderSidebar(){\n      $(\"#popularList\").innerHTML = popular.map(name =>\n        `<li><a href=\"#\" onclick=\"filterBy(\'${escapeHtml(name)}\');return false;\">${escapeHtml(name)} <span>↗</span></a></li>`\n      ).join(\"\");\n\n      $(\"#trendingList\innerHTML = trending.map(name =>\n        `<li><a href=\"#\" onclick=\"filterBy(\'${escapeHtml(name)}\');return false;\">${escapeHtml(name)} <span>↗</span></a></li>`\n      ).join(\"\");\n    }\n\n    // ---------- Footer hydration ----------\n    function hydrateFooter(){\n      const topPopular = popular.slice(0,7).map(n => `<a href=\"#\" onclick=\"filterBy(\'${escapeHtml(n)}\');return false;\">${escapeHtml(n)}</a>`).join(\"\");\n      $(\"#footerPopular\").innerHTML = topPopular;\n\n      const latest = [...posts]\n        .sort((a,b) => b.date.localeCompare(a.date))\n        .slice(0,7)\n        .map(p => `<a href=\"#\" onclick=\"window.open(\'${p.ctaHref}\', \'_blank\');return false;\">${escapeHtml(p.title)}</a>`)\n        .join(\"\");\n\n      $(\"#footerLatest\").innerHTML = latest;\n    }\n\n    // ---------- Simple route stubs ----------\n    function routeTo(route){\n      // In real project: swap templates / fetch by route / change URL\n      document.querySelectorAll(\".nav a\").forEach(a => a.classList.remove(\"active\"));\n      const active = document.querySelector(`.nav a[data-route=\"${route}\"]`);\n      if(active) active.classList.add(\"active\");\n\n      if(route === \"search\"){\n        $(\"#q\").focus();\n      } else if(route === \"latest\"){\n        // sort by date desc\n        filtered = [...posts].sort((a,b) => b.date.localeCompare(a.date));\n        page = 1;\n        $(\"#q\").value = \"\";\n        render();\n        hydrateFooter();\n      } else if(route === \"games\"){\n        alert(\"Games page stub. Implement taxonomy grid here.\");\n      } else if(route === \"about\"){\n        alert(\"About page stub.\");\n      } else if(route === \"cookie\"){\n        alert(\"Cookie policy stub.\");\n      } else {\n        // home: default ordering (as-is)\n        filtered = [...posts];\n        page = 1;\n        $(\"#q\").value = \"\";\n        render();\n        hydrateFooter();\n      }\n    }\n    window.routeTo = routeTo;\n\n    // ---------- Init ----------\n    document.addEventListener(\"DOMContentLoaded\", () => {\n      $(\"#year\").textContent = new Date().getFullYear();\n\n      renderSidebar();\n      hydrateFooter();\n      render();\n\n      $(\"#q\").addEventListener(\"input\", (e) => applySearch(e.target.value));\n\n      // mobile nav toggle\n      $(\"#burger\").addEventListener(\"click\", () => {\n        $(\"#nav\").classList.toggle(\"open\");\n      });\n\n      // nav route clicks\n      document.querySelectorAll(\".nav a\").forEach(a => {\n        a.addEventListener(\"click\", (e) => {\n          e.preventDefault();\n          routeTo(a.dataset.route);\n        });\n      });\n    });\n
+// ---------- Sample data (replace with CMS / API) ----------
+    const posts = [
+      {
+        title: "Bingo Blitz +4 freebies",
+        date: "2026-01-29",
+        excerpt: "Collect daily gifts and bonus links. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["Bingo Blitz", "Other Games"],
+        tags: ["Bingo", "Coins", "Credits", "Freebies", "Gifts", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/bingo-blitz-free-credits/",
+      },
+      {
+        title: "Bingo Bash 16+ free chips",
+        date: "2026-01-29",
+        excerpt: "Daily chip drops via official promo links. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["Bingo Bash", "Other Games"],
+        tags: ["Bingo", "Chips", "Freebies", "Power Plays"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/bingo-bash-free-chips/",
+      },
+      {
+        title: "House of Fun 3,000+ free coins",
+        date: "2026-01-29",
+        excerpt: "Stack coins for longer sessions. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["House of Fun Slots", "Slot Games"],
+        tags: ["Coins", "Free", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/house-of-fun-free-coins/",
+      },
+      {
+        title: "DoubleU Slots 280,000+ free chips",
+        date: "2026-01-29",
+        excerpt: "Claim chips from rotating links. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["DoubleU Slots", "Slot Games"],
+        tags: ["Chips", "Slots", "Freebies"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/doubleu-casino-free-chips/",
+      },
+      {
+        title: "Jackpot Party 4k+ free coins",
+        date: "2026-01-29",
+        excerpt: "Promo drops updated frequently. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["Jackpot Party", "Slot Games"],
+        tags: ["Coins", "Slots", "Freebies"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/jackpot-party-casino-free-coins/",
+      },
+      {
+        title: "Quick Hit 7,000+ free coins",
+        date: "2026-01-29",
+        excerpt: "Sample excerpt. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["Quick Hit", "Slot Games"],
+        tags: ["Coins", "Slots", "Freebies"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/quick-hit-casino-free-coins/",
+      },
+      {
+        title: "Heart of Vegas 15,000+ free coins",
+        date: "2026-01-28",
+        excerpt: "More placeholder content. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["Heart of Vegas", "Slot Games"],
+        tags: ["Coins", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/heart-of-vegas-free-coins/",
+      },
+      {
+        title: "Wizard of Oz 1.5M+ free credits",
+        date: "2026-01-28",
+        excerpt: "Credits claim page stub. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["Wizard of Oz", "Slot Games"],
+        tags: ["Credits", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/wizard-of-oz-slots-free-credits/",
+      },
+      {
+        title: "Hit It Rich 400k+ free coins",
+        date: "2026-01-27",
+        excerpt: "Coins claim page stub. Redirects to the official freebies page on slotfreebies.com.",
+        categories: ["Hit It Rich", "Slot Games"],
+        tags: ["Coins", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "https://slotfreebies.com/hit-it-rich-casino-slots-free-coins/",
+      },
+    ];
+
+    const popular = [
+      "Bingo Bash","Bingo Blitz","Caesars Slots","Cash Frenzy","Cashman Slots","DoubleDown Slots",
+      "DoubleU Slots","Heart of Vegas","House of Fun","Jackpot Party","Quick Hit","Slotomania"
+    ];
+
+    const trending = [
+      "Big Fish Slots","Club Vegas","Coin Master","GSN Slots","Jackpot World","Lotsa Slots",
+      "Monopoly Go","My Konami Slots","Scatter Slots","UNO","Willy Wonka"
+    ];
+
+    // ---------- Utilities ----------
+    const $ = (s) => document.querySelector(s);
+    const escapeHtml = (str) =>
+      str.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+         .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+
+    function formatDateParts(iso){
+      const d = new Date(iso + "T00:00:00");
+      const mon = d.toLocaleString("en-US", { month:"short" });
+      const day = String(d.getDate()).padStart(2,"0");
+      const year = d.getFullYear();
+      return { mon, day, year };
+    }
+
+    // ---------- Feed rendering + pagination ----------
+    let page = 1;
+    const pageSize = 6;
+    let filtered = [...posts];
+
+    function render(){
+      // slice page
+      const total = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / pageSize));
+      page = Math.min(page, totalPages);
+
+      const start = (page - 1) * pageSize;
+      const items = filtered.slice(start, start + pageSize);
+
+      $("#countPill").textContent = `${total} posts`;
+
+      $("#feed").innerHTML = items.map(p => {
+        const { mon, day, year } = formatDateParts(p.date);
+        const cats = p.categories.map(c => `<a href="#" onclick="filterBy('${escapeHtml(c)}');return false;">${escapeHtml(c)}</a>`).join(", ");
+        const tags = p.tags.map(t => `<a class="tag" href="#" onclick="filterBy('${escapeHtml(t)}');return false;">${escapeHtml(t)}</a>`).join("");
+
+        return `
+          <article class="post">
+            <div class="datebox" aria-label="Post date">
+              <div class="mon">${escapeHtml(mon)}</div>
+              <div class="day">${escapeHtml(day)}</div>
+              <div class="year">${escapeHtml(String(year))}</div>
+            </div>
+
+            <div>
+              <h2><a href="#" onclick="alert('Open post stub');return false;">${escapeHtml(p.title)}</a></h2>
+              <p class="excerpt">${escapeHtml(p.excerpt)}</p>
+
+              <div class="cta-row">
+                <button class="btn" onclick="window.open('${p.ctaHref}', '_blank')">
+                  ${escapeHtml(p.ctaText)} <span aria-hidden="true">→</span>
+                </button>
+                <div class="meta">
+                  Posted in ${cats}
+                </div>
+              </div>
+
+              <div class="tags" aria-label="Tags">
+                ${tags}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      // pager
+      const pages = [];
+      for(let i=1;i<=totalPages;i++){
+        pages.push(`<a class="page ${i===page?'active':''}" href="#" onclick="gotoPage(${i});return false;">${i}</a>`);
+      }
+      const next = page < totalPages
+        ? `<a class="page" href="#" onclick="gotoPage(${page+1});return false;">Next »</a>`
+        : "";
+
+      $("#pager").innerHTML = pages.join("") + (next ? ` <span style="flex:1"></span> ${next}` : "");
+    }
+
+    function gotoPage(p){ page = p; render(); window.scrollTo(0, 0); }
+    function filterBy(token){
+      const t = token.toLowerCase();
+      $("#q").value = token;
+      applySearch(t);
+    }
+
+    function applySearch(q){
+      const query = (q || "").trim().toLowerCase();
+      filtered = posts.filter(p => {
+        const hay = [
+          p.title, p.excerpt,
+          ...(p.categories||[]),
+          ...(p.tags||[])
+        ].join(" ").toLowerCase();
+        return hay.includes(query);
+      });
+      page = 1;
+      render();
+      hydrateFooter();
+    }
+
+    // ---------- Sidebar lists ----------
+    function renderSidebar(){
+      $("#popularList").innerHTML = popular.map(name =>
+        `<li><a href="#" onclick="filterBy('${escapeHtml(name)}');return false;">${escapeHtml(name)} <span>↗</span></a></li>`
+      ).join("");
+
+      $("#trendingList").innerHTML = trending.map(name =>
+        `<li><a href="#" onclick="filterBy('${escapeHtml(name)}');return false;">${escapeHtml(name)} <span>↗</span></a></li>`
+      ).join("");
+    }
+
+    // ---------- Footer hydration ----------
+    function hydrateFooter(){
+      const topPopular = popular.slice(0,7).map(n => `<a href="#" onclick="filterBy('${escapeHtml(n)}');return false;">${escapeHtml(n)}</a>`).join("");
+      $("#footerPopular").innerHTML = topPopular;
+
+      const latest = [...posts]
+        .sort((a,b) => b.date.localeCompare(a.date))
+        .slice(0,7)
+        .map(p => `<a href="#" onclick="window.open('${p.ctaHref}', '_blank');return false;">${escapeHtml(p.title)}</a>`)
+        .join("");
+
+      $("#footerLatest").innerHTML = latest;
+    }
+
+    // ---------- Simple route stubs ----------
+    function routeTo(route){
+      // In real project: swap templates / fetch by route / change URL
+      document.querySelectorAll(".nav a").forEach(a => a.classList.remove("active"));
+      const active = document.querySelector(`.nav a[data-route="${route}"]`);
+      if(active) active.classList.add("active");
+
+      if(route === "search"){
+        $("#q").focus();
+      } else if(route === "latest"){
+        // sort by date desc
+        filtered = [...posts].sort((a,b) => b.date.localeCompare(a.date));
+        page = 1;
+        $("#q").value = "";
+        render();
+        hydrateFooter();
+      } else if(route === "games"){
+        alert("Games page stub. Implement taxonomy grid here.");
+      } else if(route === "about"){
+        alert("About page stub.");
+      } else if(route === "cookie"){
+        alert("Cookie policy stub.");
+      } else {
+        // home: default ordering (as-is)
+        filtered = [...posts];
+        page = 1;
+        $("#q").value = "";
+        render();
+        hydrateFooter();
+      }
+    }
+    window.routeTo = routeTo;
+
+    // ---------- Init ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      $("#year").textContent = new Date().getFullYear();
+
+      renderSidebar();
+      hydrateFooter();
+      render();
+
+      $("#q").addEventListener("input", (e) => applySearch(e.target.value));
+
+      // mobile nav toggle
+      $("#burger").addEventListener("click", () => {
+        $("#nav").classList.toggle("open");
+      });
+
+      // nav route clicks
+      document.querySelectorAll(".nav a").forEach(a => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          routeTo(a.dataset.route);
+        });
+      });
+    });
