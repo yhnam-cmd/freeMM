@@ -8,69 +8,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - Freebies Hub</title>
   <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
 </head>
 <body>
 
   <header class="header">
-    <div class="container">
-      <a class="logo" href="/" onclick="routeTo('home'); return false;">SF <span>Freebies Hub</span></a>
-      <nav class="nav" id="nav">
+    <div class="logo">
+      <a href="/" onclick="routeTo('home'); return false;"><span>SF</span> Freebies Hub</a>
+    </div>
+    <nav id="nav" class="nav">
         <a href="/" data-route="home" onclick="routeTo('home'); return false;">Home</a>
         <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
         <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
         <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
         <a href="/about.html" data-route="about" class="active">About</a>
-        <a href="/privacy.html" data-route="cookie">Cookie Policy</a>
+        <a href="/privacy.html" data-route="privacy">Privacy Policy</a>
+        <a href="/contact.html" data-route="contact">Contact</a>
       </nav>
-       <button id="burger" class="burger" aria-label="Open navigation">&#9776;</button>
+    <div class="header-right">
+      <div class="search-container">
+        <input type="search" id="q" placeholder="Search freebies..." autocomplete="off">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+      </div>
+      <div id="countPill" class="count-pill">...</div>
+      <button id="burger" class="burger" aria-label="Toggle mobile navigation">☰</button>
     </div>
   </header>
 
-  <main class="container page-container">
-    <article class="post-full">
-        <h1>About Freebies Hub</h1>
-        <div class="post-body">
-            <p>Welcome to Freebies Hub, your number one source for daily freebies, coins, spins, and credits for your favorite social casino and mobile games.</p>
-            <h2>Our Mission</h2>
-            <p>Our mission is simple: to provide a clean, reliable, and user-friendly platform where gamers can easily find and claim the latest promotional links without hassle. We understand that keeping up with daily rewards can be a chore, so we do the hard work for you.</p>
-            <h2>What We Do</h2>
-            <p>We monitor the official social media channels and communities of popular games to aggregate all available freebie links in one convenient place. Our lists are updated regularly to ensure you never miss out on a reward.</p>
-            <p><em>This site is an independent entity and is not affiliated with any of the game developers mentioned. All game titles and trademarks are the property of their respective owners.</em></p>
-             <a class="btn-back" href="/" onclick="routeTo('home'); return false;" style="margin-top:2rem">← Back to Home</a>
+  <main class="container">
+    <div class="content-area" style="width: 100%; max-width: 800px; margin: 0 auto;">
+        <div class="post-full">
+            <h1>About Freebies Hub</h1>
+            <div class="post-body">
+                <p>Welcome to Freebies Hub, your number one source for all things free in the world of social and mobile gaming. We're dedicated to giving you the very best of daily rewards, with a focus on reliability, speed, and user trust.</p>
+                
+                <p>Founded in 2024 by a group of passionate gamers, Freebies Hub has come a long way from its beginnings. When we first started out, our passion for helping other players get more fun out of their games drove us to do intense research, and gave us the impetus to turn hard work and inspiration into a booming online resource. We now serve gamers all over the world, and are thrilled to be a part of the fair-play wing of the gaming industry.</p>
+                
+                <h3>Our Mission</h3>
+                <p>Our mission is simple: to provide a single, trustworthy platform where players can find and claim official daily rewards for their favorite games without any hassle. We believe that everyone deserves to enjoy their gaming experience to the fullest, and we work hard to ensure our links are always up-to-date and safe.</p>
+                
+                <h3>Why Trust Us?</h3>
+                <p>We understand that the internet can be a tricky place. That's why we are committed to transparency and user safety. Here’s our promise:</p>
+                <ul>
+                    <li><strong>Official Links Only:</strong> We only source links from the official social media channels and developer communications.</li>
+                    <li><strong>Daily Updates:</strong> Our team works around the clock to ensure our lists are fresh every single day.</li>
+                    <li><strong>User-Focused:</strong> We built this site for you. We are always open to feedback and suggestions to improve your experience.</li>
+                </ul>
+                
+                <p>We hope you enjoy our service as much as we enjoy offering it to you. If you have any questions or comments, please don't hesitate to <a href="/contact.html">contact us</a>.</p>
+            </div>
         </div>
-    </article>
+    </div>
   </main>
 
   <footer class="footer">
-     <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Freebies Hub Info</h3>
-                <p>Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.</p>
-            </div>
-            <div class="footer-col">
-                <h3>Info</h3>
-                <ul class="footer-links">
-                    <li><a href="/" onclick="routeTo('home'); return false;">Home</a></li>
-                    <li><a href="/about.html">About</a></li>
-                    <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
-                    <li><a href="/privacy.html">Cookie Policy</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Popular Games</h3>
-                <div class="tag-cloud" id="footerPopular"></div>
-            </div>
-            <div class="footer-col">
-                <h3>Latest Game Freebies</h3>
-                 <div class="tag-cloud" id="footerLatest"></div>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2024 Your Company. All rights reserved.
-        </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Freebies Hub Info</h4>
+        <p>Your daily source for gaming rewards. We find the links, you get the fun.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul class="footer-links">
+          <li><a href="/" onclick="routeTo('home'); return false;">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Games</h4>
+        <div id="footerPopular" class="footer-tags"></div>
+      </div>
+      <div class="footer-col">
+        <h4>Latest Game Freebies</h4>
+        <div id="footerLatest" class="footer-tags"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Freebies Hub. All rights reserved.</p>
     </div>
   </footer>
-  <script src="main.js"></script>
+
 </body>
 </html>

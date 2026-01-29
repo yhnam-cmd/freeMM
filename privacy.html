@@ -8,81 +8,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - Freebies Hub</title>
   <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
 </head>
 <body>
 
   <header class="header">
-    <div class="container">
-      <a class="logo" href="/" onclick="routeTo('home'); return false;">SF <span>Freebies Hub</span></a>
-      <nav class="nav" id="nav">
+    <div class="logo">
+      <a href="/" onclick="routeTo('home'); return false;"><span>SF</span> Freebies Hub</a>
+    </div>
+    <nav id="nav" class="nav">
         <a href="/" data-route="home" onclick="routeTo('home'); return false;">Home</a>
         <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
         <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
         <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
         <a href="/about.html" data-route="about">About</a>
-        <a href="/privacy.html" data-route="cookie" class="active">Cookie Policy</a>
+        <a href="/privacy.html" data-route="privacy" class="active">Privacy Policy</a>
+        <a href="/contact.html" data-route="contact">Contact</a>
       </nav>
-      <button id="burger" class="burger" aria-label="Open navigation">&#9776;</button>
+    <div class="header-right">
+      <div class="search-container">
+        <input type="search" id="q" placeholder="Search freebies..." autocomplete="off">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+      </div>
+      <div id="countPill" class="count-pill">...</div>
+      <button id="burger" class="burger" aria-label="Toggle mobile navigation">☰</button>
     </div>
   </header>
 
-  <main class="container page-container">
-    <article class="post-full">
-        <h1>Privacy Policy</h1>
-        <div class="post-body">
-            <p>Your privacy is important to us. It is Freebies Hub's policy to respect your privacy regarding any information we may collect from you across our website.</p>
+  <main class="container">
+    <div class="content-area" style="width: 100%; max-width: 800px; margin: 0 auto;">
+        <div class="post-full">
+            <h1>Privacy Policy</h1>
+            <div class="post-body">
+                <p><strong>Last Updated:</strong> July 29, 2024</p>
 
-            <h2>1. Information We Collect</h2>
-            <p>We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.</p>
-            
-            <h2>2. Cookies</h2>
-            <p>We use cookies to help improve your experience of our website. A cookie is a small piece of data that our website stores on your computer, and accesses each time you visit, so we can understand how you use our site. This helps us serve you content based on preferences you have specified.</p>
+                <p>Freebies Hub ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
 
-            <h2>3. Third-Party Services</h2>
-            <p>We may employ third-party companies and individuals on our websites – for example, analytics providers (like Google Analytics) and content partners (like ad networks). These third parties have access to your personal information only to perform specific tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+                <h3>Information We Collect</h3>
+                <p>We may collect information about you in a variety of ways. The information we may collect on the Site includes:</p>
+                <ul>
+                    <li><strong>Log Data:</strong> Like most website operators, we collect information that your browser sends whenever you visit our Site. This Log Data may include information such as your computer's Internet Protocol ("IP") address, browser type, browser version, the pages of our Site that you visit, the time and date of your visit, the time spent on those pages, and other statistics.</li>
+                    <li><strong>Cookies:</strong> We use cookies to store information about visitors' preferences, to record user-specific information on which pages the user accesses or visits, and to personalize or customize our web page content based upon visitors' browser type or other information that the visitor sends via their browser.</li>
+                </ul>
 
-            <h2>4. Links To Other Sites</h2>
-            <p>Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and practices of these sites, and cannot accept responsibility or liability for their respective privacy policies.</p>
+                <h3>Advertising and Cookies</h3>
+                <p>We use third-party advertising companies, such as Google AdSense, to serve ads when you visit our website. These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
+                <ul>
+                    <li>Google, as a third-party vendor, uses cookies to serve ads on our Site.</li>
+                    <li>Google's use of the DART cookie enables it to serve ads to our users based on their visit to our Sites and other sites on the Internet.</li>
+                    <li>Users may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy.</li>
+                </ul>
+                <p>We also use CookieYes to manage cookie consent on our website, allowing you to control the cookies that are used.</p>
 
-            <h2>5. Your Rights</h2>
-            <p>You are free to refuse our request for your personal information, with the understanding that we may be unable to provide you with some of your desired services. Your continued use of our website will be regarded as acceptance of our practices around privacy and personal information.</p>
+                <h3>How We Use Your Information</h3>
+                <p>Having accurate information permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:</p>
+                <ul>
+                    <li>Monitor and analyze usage and trends to improve your experience with the Site.</li>
+                    <li>Serve personalized advertising to you.</li>
+                    <li>Understand how our users use the services and resources provided on our Site.</li>
+                </ul>
 
-            <p>This policy is effective as of 1 January 2024.</p>
-             <a class="btn-back" href="/" onclick="routeTo('home'); return false;" style="margin-top:2rem">← Back to Home</a>
+                <h3>Security of Your Information</h3>
+                <p>We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.</p>
+
+                <h3>Changes to This Privacy Policy</h3>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please <a href="/contact.html">contact us</a>.</p>
+            </div>
         </div>
-    </article>
+    </div>
   </main>
 
   <footer class="footer">
-     <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Freebies Hub Info</h3>
-                <p>Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.</p>
-            </div>
-            <div class="footer-col">
-                <h3>Info</h3>
-                <ul class="footer-links">
-                    <li><a href="/" onclick="routeTo('home'); return false;">Home</a></li>
-                    <li><a href="/about.html">About</a></li>
-                    <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
-                    <li><a href="/privacy.html">Cookie Policy</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Popular Games</h3>
-                <div class="tag-cloud" id="footerPopular"></div>
-            </div>
-            <div class="footer-col">
-                <h3>Latest Game Freebies</h3>
-                 <div class="tag-cloud" id="footerLatest"></div>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2024 Your Company. All rights reserved.
-        </div>
+     <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Freebies Hub. All rights reserved.</p>
     </div>
   </footer>
-  <script src="main.js"></script>
+
 </body>
 </html>

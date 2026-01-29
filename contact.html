@@ -8,71 +8,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Freebies Hub</title>
   <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
 </head>
 <body>
 
   <header class="header">
-    <div class="container">
-      <a class="logo" href="/" onclick="routeTo('home'); return false;">SF <span>Freebies Hub</span></a>
-      <nav class="nav" id="nav">
+    <div class="logo">
+      <a href="/" onclick="routeTo('home'); return false;"><span>SF</span> Freebies Hub</a>
+    </div>
+    <nav id="nav" class="nav">
         <a href="/" data-route="home" onclick="routeTo('home'); return false;">Home</a>
         <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
         <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
         <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
         <a href="/about.html" data-route="about">About</a>
-        <a href="/privacy.html" data-route="cookie">Cookie Policy</a>
+        <a href="/privacy.html" data-route="privacy">Privacy Policy</a>
         <a href="/contact.html" data-route="contact" class="active">Contact</a>
       </nav>
-       <button id="burger" class="burger" aria-label="Open navigation">&#9776;</button>
+    <div class="header-right">
+      <div class="search-container">
+        <input type="search" id="q" placeholder="Search freebies..." autocomplete="off">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+      </div>
+      <div id="countPill" class="count-pill">...</div>
+      <button id="burger" class="burger" aria-label="Toggle mobile navigation">☰</button>
     </div>
   </header>
 
-  <main class="container page-container">
-    <article class="post-full">
-        <h1>Contact Us</h1>
-        <div class="post-body">
-            <p>If you have any questions, suggestions, or would like to report a broken link, please feel free to reach out to us. We appreciate your feedback!</p>
-            
-            <h2>Email</h2>
-            <p>For all inquiries, please email us at: <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></p>
-            <p><em>(Please replace with a real email address)</em></p>
+  <main class="container">
+    <div class="content-area" style="width: 100%; max-width: 800px; margin: 0 auto;">
+        <div class="post-full">
+            <h1>Contact Us</h1>
+            <div class="post-body">
+                <p>We value your feedback, questions, and suggestions. If you have anything to share, or if you've encountered an issue with our site, please don't hesitate to get in touch.</p>
 
-             <a class="btn-back" href="/" onclick="routeTo('home'); return false;" style="margin-top:2rem">← Back to Home</a>
+                <h3>General Inquiries</h3>
+                <p>For all general questions, partnership opportunities, or feedback, please email us at:</p>
+                <p style="text-align: center; font-size: 1.2rem; font-weight: 600;">
+                    <a href="mailto:contact@freebieshub.com">contact@freebieshub.com</a>
+                </p>
+
+                <h3>Technical Support</h3>
+                <p>If you are experiencing technical difficulties with the website or have found a broken link, please let us know by emailing our support team. Please be as detailed as possible so we can resolve the issue quickly.</p>
+                 <p style="text-align: center; font-size: 1.2rem; font-weight: 600;">
+                    <a href="mailto:support@freebieshub.com">support@freebieshub.com</a>
+                </p>
+
+                <p>We do our best to respond to all inquiries within 48 business hours.</p>
+            </div>
         </div>
-    </article>
+    </div>
   </main>
 
   <footer class="footer">
-     <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Freebies Hub Info</h3>
-                <p>Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.</p>
-            </div>
-            <div class="footer-col">
-                <h3>Info</h3>
-                <ul class="footer-links">
-                    <li><a href="/" onclick="routeTo('home'); return false;">Home</a></li>
-                    <li><a href="/about.html">About</a></li>
-                    <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
-                    <li><a href="/privacy.html">Cookie Policy</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Popular Games</h3>
-                <div class="tag-cloud" id="footerPopular"></div>
-            </div>
-            <div class="footer-col">
-                <h3>Latest Game Freebies</h3>
-                 <div class="tag-cloud" id="footerLatest"></div>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2024 Your Company. All rights reserved.
-        </div>
+     <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Freebies Hub. All rights reserved.</p>
     </div>
   </footer>
-  <script src="main.js"></script>
+
 </body>
 </html>
