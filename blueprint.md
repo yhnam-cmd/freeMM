@@ -68,10 +68,18 @@ This is the strategic plan to attract users from search engines and provide clea
 
 ---
 
-## 4. Current Task: Layout & Sorting Fix
+## 4. Current Task: Implement Social Sharing & Fix Images
 
-*   **Objective:** Stabilize the application after recent updates.
-*   **Completed Steps:**
-    1.  **Fix Layout:** Corrected the main grid layout in `index.html` and `style.css` to prevent the content area and sidebar from overlapping.
-    2.  **Implement Link-First Sorting:** Updated `main.js` to sort the main feed, ensuring posts with real reward links appear at the top, followed by other posts sorted by date.
-    3.  **Resolve JS Errors:** Corrected a critical syntax error in `main.js` that was preventing the entire application from rendering.
+*   **Objective:** Increase user engagement and organic traffic by allowing users to share posts, and improve visual consistency by fixing broken images.
+
+*   **Phase 1: Image Correction (Completed)**
+    1.  **Problem:** Placeholder images in the "All Games" directory were broken or irrelevant.
+    2.  **Solution:** Updated `posts.json` to use the Clearbit API (`logo.clearbit.com/:domain`). This dynamically fetches the official logo for each game based on its `ctaHref` (official website), ensuring all images are relevant and professional.
+
+*   **Phase 2: Social Sharing Implementation (In Progress)**
+    1.  **Goal:** Add 'Share' buttons (Facebook, Twitter, Email, etc.) to each game detail page.
+    2.  **Mechanism:** These buttons will not link to our own social media profiles. Instead, they will open a new window for the user to post the current page's URL directly to their own social feed, effectively creating user-generated marketing.
+    3.  **Action Items:**
+        *   Update `main.js` to include a `renderShareButtons` function that generates the necessary HTML and logic.
+        *   The function will dynamically create share URLs (e.g., `https://www.facebook.com/sharer/sharer.php?u=...`).
+        *   Update `style.css` to ensure the new share buttons are visually appealing and well-integrated into the post detail view.

@@ -136,16 +136,20 @@ function renderPostDetail(id) {
   const links = (post.links || []).map(link =>
     `<li><a href=\"#\" onclick=\"window.open('${escapeHtml(link.url)}', '_blank')\" class=\"btn-link\">${escapeHtml(link.text)} <span aria-hidden=\"true\">→</span></a></li>`
   ).join("");
+    const shareButtonsHtml = renderShareButtons(post);
+
   $postView.innerHTML = `
     <article class=\"post-full\">
       <button class=\"btn-back\" onclick=\"routeTo('home');\">← Back to list</button>
       <h1>${escapeHtml(post.title)}</h1>
       <div class=\"meta-full\">Published on ${mon} ${day}, ${year}</div>
       <div class=\"post-body\">
+        <img src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" class="post-full-image">
         <p>${escapeHtml(post.excerpt)}</p>
         <h3>Available Rewards:</h3>
         <ul class=\"reward-links\">${links.length > 0 ? links : '<li>No reward links available yet.</li>'}</ul>
         <div style=\"margin-top: 24px; text-align: center;\"><a href=\"#\" onclick=\"window.open('${escapeHtml(post.ctaHref)}', '_blank')\" class=\"featured-btn\">Visit Official Site</a></div>
+        ${shareButtonsHtml}
       </div>
     </article>
   `;
@@ -199,6 +203,33 @@ function renderSearchResults(query) {
         `;
     }).join('');
 }
+
+function renderShareButtons(post) {
+  const postUrl = `${window.location.origin}${window.location.pathname}#!/post/${post.id}`;
+  const encodedUrl = encodeURIComponent(postUrl);
+  const encodedTitle = encodeURIComponent(post.title);
+  const text = encodeURIComponent(`Check out the rewards for ${post.title}!`);
+
+  return `
+    <div class="share-widget">
+      <h3>Share These Rewards</h3>
+      <div class="share-buttons">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}"
+           onclick="sharePopup(this.href, 'Facebook'); return false;"
+           class="share-btn facebook"
+           aria-label="Share on Facebook">Facebook</a>
+        <a href="https://twitter.com/intent/tweet?url=${encodedUrl}&text=${text}"
+           onclick="sharePopup(this.href, 'Twitter'); return false;"
+           class="share-btn twitter"
+           aria-label="Share on Twitter">Twitter</a>
+        <a href="mailto:?subject=${encodedTitle}&body=Check out these rewards: ${encodedUrl}"
+           class="share-btn email"
+           aria-label="Share via Email">Email</a>
+      </div>
+    </div>
+  `;
+}
+
 
 function renderSidebar() {
     const categories = {};
@@ -260,6 +291,15 @@ function routeTo(route, params = {}) {
     }
 }
 window.routeTo = routeTo;
+
+function sharePopup(url, title) {
+  const width = 600;
+  const height = 400;
+  const left = (window.screen.width / 2) - (width / 2);
+  const top = (window.screen.height / 2) - (height / 2);
+  window.open(url, title, `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${width}, height=${height}, top=${top}, left=${left}`);
+}
+window.sharePopup = sharePopup;
 
 function handleFeedRoute(route) {
   switch (route) {
