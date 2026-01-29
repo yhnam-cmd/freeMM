@@ -1,34 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Slot Game Aggregator</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
-     crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Freebies Hub</title>
+  <meta name="description" content="Daily freebies links for social casino & casual games." />
   <link href="/style.css" rel="stylesheet">
 </head>
 <body>
 
-  <header>
-    <div class="controls">
-      <button class="filter-btn active" data-filter="all">All Games</button>
-      <button class="filter-btn" data-filter="newest">Newest</button>
-      <button class="filter-btn" data-filter="popular">Popular</button>
-      <div class="search-bar">
-        <input type="search" id="search-input" placeholder="Search games...">
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="navwrap">
+      <a class="brand" href="#" aria-label="Home">
+        <div class="logo">SF</div>
+        <div>Freebies Hub</div>
+      </a>
+
+      <button class="burger" id="burger" aria-label="Toggle navigation">☰</button>
+
+      <nav class="nav" id="nav">
+        <a class="active" href="#" data-route="home">Home</a>
+        <a href="#" data-route="games">Games</a>
+        <a href="#" data-route="search">Search</a>
+        <a href="#" data-route="latest">Latest</a>
+        <a href="#" data-route="about">About</a>
+        <a href="#" data-route="cookie">Cookie Policy</a>
+      </nav>
+
+      <div class="nav-right" style="width:100%; max-width:460px;">
+        <div class="searchbox" title="Filter posts by title/category/tag">
+          <span aria-hidden="true">🔎</span>
+          <input id="q" type="search" placeholder="Search freebies..." autocomplete="off" />
+        </div>
+        <div class="pill" id="countPill">0 posts</div>
       </div>
     </div>
   </header>
 
-  <main id="game-grid">
-    <!-- Game cards and ad placeholders will be dynamically inserted here -->
+  <!-- Main layout -->
+  <main class="container">
+    <!-- Left: feed -->
+    <section>
+      <div id="feed"></div>
+
+      <div class="pager" id="pager" aria-label="Pagination"></div>
+    </section>
+
+    <!-- Right: sidebar -->
+    <aside class="sidebar">
+      <div class="widget">
+        <div class="heroimg" role="img" aria-label="Sidebar banner image"></div>
+        <div class="w-body">
+          <div style="font-weight:900; margin-bottom:6px;">Popular Freebies</div>
+          <div class="small" style="color:var(--muted); font-size:13px;">
+            Quick links by game category. Replace with your real taxonomy.
+          </div>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="w-head">Popular Freebies</div>
+        <div class="w-body">
+          <ul class="list" id="popularList"></ul>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="w-head">Trending Freebies</div>
+        <div class="w-body">
+          <ul class="list" id="trendingList"></ul>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="w-head">Share</div>
+        <div class="w-body">
+          <div class="small">Social share placeholder (cookie-consent dependent).</div>
+          <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+            <a class="tag" href="#" onclick="alert('Share stub'); return false;">Facebook</a>
+            <a class="tag" href="#" onclick="alert('Share stub'); return false;">X</a>
+            <a class="tag" href="#" onclick="alert('Share stub'); return false;">Reddit</a>
+          </div>
+        </div>
+      </div>
+    </aside>
   </main>
 
-  <script defer type="text/javascript" src="/main.js"></script>
+  <!-- Footer -->
+  <footer>
+    <div class="footwrap">
+      <div>
+        <h4>Freebies Hub Info</h4>
+        <div class="small">
+          Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.
+        </div>
+      </div>
 
+      <div>
+        <h4>Info</h4>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <a href="#" onclick="routeTo('home'); return false;">Home</a>
+          <a href="#" onclick="routeTo('about'); return false;">About</a>
+          <a href="#" onclick="routeTo('latest'); return false;">Latest</a>
+          <a href="#" onclick="routeTo('cookie'); return false;">Cookie Policy</a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Popular Games</h4>
+        <div style="display:flex; flex-direction:column; gap:8px;" id="footerPopular"></div>
+      </div>
+
+      <div>
+        <h4>Latest Game Freebies</h4>
+        <div style="display:flex; flex-direction:column; gap:8px;" id="footerLatest"></div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div>© <span id="year"></span> Freebies Hub</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="#" onclick="alert('Privacy stub'); return false;">Privacy</a>
+        <a href="#" onclick="alert('Disclaimer stub'); return false;">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+
+  <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>

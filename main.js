@@ -1,112 +1,275 @@
-document.addEventListener('DOMContentLoaded', () => {
+// ---------- Sample data (replace with CMS / API) ----------
+    const posts = [
+      {
+        title: "Bingo Blitz +4 freebies",
+        date: "2026-01-29",
+        excerpt: "Collect daily gifts and bonus links. Replace with your own post summary text.",
+        categories: ["Bingo Blitz", "Other Games"],
+        tags: ["Bingo", "Coins", "Credits", "Freebies", "Gifts", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      {
+        title: "Bingo Bash 16+ free chips",
+        date: "2026-01-29",
+        excerpt: "Daily chip drops via official promo links. This is placeholder copy.",
+        categories: ["Bingo Bash", "Other Games"],
+        tags: ["Bingo", "Chips", "Freebies", "Power Plays"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      {
+        title: "House of Fun 3,000+ free coins",
+        date: "2026-01-29",
+        excerpt: "Stack coins for longer sessions. Hook this to a real collect page.",
+        categories: ["House of Fun Slots", "Slot Games"],
+        tags: ["Coins", "Free", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      {
+        title: "DoubleU Slots 280,000+ free chips",
+        date: "2026-01-29",
+        excerpt: "Claim chips from rotating links. Replace with your own post model.",
+        categories: ["DoubleU Slots", "Slot Games"],
+        tags: ["Chips", "Slots", "Freebies"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      {
+        title: "Jackpot Party 4k+ free coins",
+        date: "2026-01-29",
+        excerpt: "Promo drops updated frequently. Add your tags/categories rules here.",
+        categories: ["Jackpot Party", "Slot Games"],
+        tags: ["Coins", "Slots", "Freebies"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      {
+        title: "Quick Hit 7,000+ free coins",
+        date: "2026-01-29",
+        excerpt: "Sample excerpt. Use pagination below to mimic the feed behavior.",
+        categories: ["Quick Hit", "Slot Games"],
+        tags: ["Coins", "Slots", "Freebies"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      // add more to see pagination
+      {
+        title: "Heart of Vegas 15,000+ free coins",
+        date: "2026-01-28",
+        excerpt: "More placeholder content for older date.",
+        categories: ["Heart of Vegas", "Slot Games"],
+        tags: ["Coins", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      {
+        title: "Wizard of Oz 1.5M+ free credits",
+        date: "2026-01-28",
+        excerpt: "Credits claim page stub.",
+        categories: ["Wizard of Oz", "Slot Games"],
+        tags: ["Credits", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+      {
+        title: "Hit It Rich 400k+ free coins",
+        date: "2026-01-27",
+        excerpt: "Coins claim page stub.",
+        categories: ["Hit It Rich", "Slot Games"],
+        tags: ["Coins", "Freebies", "Slots"],
+        ctaText: "Collect Freebies",
+        ctaHref: "#",
+      },
+    ];
 
-  const mockGames = [
-    { id: 1, name: 'Cosmic Reels', category: 'newest', imageUrl: 'https://picsum.photos/seed/cosmic/300/200' },
-    { id: 2, name: 'Galaxy Gems', category: 'popular', imageUrl: 'https://picsum.photos/seed/galaxy/300/200' },
-    { id: 3, name: 'Starburst Spin', category: 'newest', imageUrl: 'https://picsum.photos/seed/starburst/300/200' },
-    { id: 4, name: 'Neon Nights', category: 'popular', imageUrl: 'https://picsum.photos/seed/neon/300/200' },
-    { id: 5, name: 'Jackpot Jupiter', category: 'all', imageUrl: 'https://picsum.photos/seed/jupiter/300/200' },
-    { id: 6, name: 'Vegas Vortex', category: 'newest', imageUrl: 'https://picsum.photos/seed/vegas/300/200' },
-    { id: 7, name: 'Pirate's Plunder', category: 'popular', imageUrl: 'https://picsum.photos/seed/pirate/300/200' },
-    { id: 8, name: 'Aztec Adventure', category: 'all', imageUrl: 'https://picsum.photos/seed/aztec/300/200' },
-  ];
+    const popular = [
+      "Bingo Bash","Bingo Blitz","Caesars Slots","Cash Frenzy","Cashman Slots","DoubleDown Slots",
+      "DoubleU Slots","Heart of Vegas","House of Fun","Jackpot Party","Quick Hit","Slotomania"
+    ];
 
-  class GameCard extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
+    const trending = [
+      "Big Fish Slots","Club Vegas","Coin Master","GSN Slots","Jackpot World","Lotsa Slots",
+      "Monopoly Go","My Konami Slots","Scatter Slots","UNO","Willy Wonka"
+    ];
+
+    // ---------- Utilities ----------
+    const $ = (s) => document.querySelector(s);
+    const escapeHtml = (str) =>
+      str.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+         .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+
+    function formatDateParts(iso){
+      const d = new Date(iso + "T00:00:00");
+      const mon = d.toLocaleString("en-US", { month:"short" });
+      const day = String(d.getDate()).padStart(2,"0");
+      const year = d.getFullYear();
+      return { mon, day, year };
     }
 
-    connectedCallback() {
-      const name = this.getAttribute('name');
-      const imageUrl = this.getAttribute('image-url');
+    // ---------- Feed rendering + pagination ----------
+    let page = 1;
+    const pageSize = 6;
+    let filtered = [...posts];
 
-      this.shadowRoot.innerHTML = `
-        <style>
-          :host { display: block; }
-          .card {
-            background-color: var(--card-background, #2a1a4a);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 0 15px rgba(255, 0, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-          }
-          .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 25px var(--primary-glow, #ff00ff);
-          }
-          img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-          }
-          .title-container {
-            padding: 1rem;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-          }
-        </style>
-        <div class="card">
-          <img src="${imageUrl}" alt="${name}">
-          <div class="title-container"><span>${name}</span></div>
-        </div>
-      `;
-    }
-  }
+    function render(){
+      // slice page
+      const total = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / pageSize));
+      page = Math.min(page, totalPages);
 
-  if (!customElements.get('game-card')) {
-    customElements.define('game-card', GameCard);
-  }
+      const start = (page - 1) * pageSize;
+      const items = filtered.slice(start, start + pageSize);
 
-  const mainContainer = document.querySelector('.site-main');
-  const searchInput = document.getElementById('search-input');
-  const navButtons = document.querySelectorAll('.nav-button');
+      $("#countPill").textContent = `${total} posts`;
 
-  let currentFilter = 'all';
-  let searchTerm = '';
+      $("#feed").innerHTML = items.map(p => {
+        const { mon, day, year } = formatDateParts(p.date);
+        const cats = p.categories.map(c => `<a href="#" onclick="filterBy('${escapeHtml(c)}');return false;">${escapeHtml(c)}</a>`).join(", ");
+        const tags = p.tags.map(t => `<a class="tag" href="#" onclick="filterBy('${escapeHtml(t)}');return false;">${escapeHtml(t)}</a>`).join("");
 
-  const renderGames = () => {
-    mainContainer.innerHTML = ''; 
+        return `
+          <article class="post">
+            <div class="datebox" aria-label="Post date">
+              <div class="mon">${escapeHtml(mon)}</div>
+              <div class="day">${escapeHtml(day)}</div>
+              <div class="year">${escapeHtml(String(year))}</div>
+            </div>
 
-    let filteredGames = mockGames.filter(game => {
-      const matchesFilter = currentFilter === 'all' || game.category === currentFilter;
-      const matchesSearch = game.name.toLowerCase().includes(searchTerm.toLowerCase());
-      return matchesFilter && matchesSearch;
-    });
+            <div>
+              <h2><a href="#" onclick="alert('Open post stub');return false;">${escapeHtml(p.title)}</a></h2>
+              <p class="excerpt">${escapeHtml(p.excerpt)}</p>
 
-    filteredGames.forEach((game, index) => {
-      // Insert an ad slot after every 4th game
-      if (index > 0 && index % 4 === 0) {
-        const adPlaceholder = document.createElement('div');
-        adPlaceholder.className = 'ad-placeholder';
-        adPlaceholder.textContent = 'Ad Slot';
-        mainContainer.appendChild(adPlaceholder);
+              <div class="cta-row">
+                <button class="btn" onclick="window.location.href='${p.ctaHref}'">
+                  ${escapeHtml(p.ctaText)} <span aria-hidden="true">→</span>
+                </button>
+                <div class="meta">
+                  Posted in ${cats}
+                </div>
+              </div>
+
+              <div class="tags" aria-label="Tags">
+                ${tags}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      // pager
+      const pages = [];
+      for(let i=1;i<=totalPages;i++){
+        pages.push(`<a class="page ${i===page?'active':''}" href="#" onclick="gotoPage(${i});return false;">${i}</a>`);
       }
+      const next = page < totalPages
+        ? `<a class="page" href="#" onclick="gotoPage(${page+1});return false;">Next »</a>`
+        : "";
 
-      const gameCard = document.createElement('game-card');
-      gameCard.setAttribute('name', game.name);
-      gameCard.setAttribute('image-url', game.imageUrl);
-      mainContainer.appendChild(gameCard);
+      $("#pager").innerHTML = pages.join("") + (next ? ` <span style="flex:1"></span> ${next}` : "");
+    }
+
+    function gotoPage(p){ page = p; render(); }
+    function filterBy(token){
+      const t = token.toLowerCase();
+      $("#q").value = token;
+      applySearch(t);
+    }
+
+    function applySearch(q){
+      const query = (q || "").trim().toLowerCase();
+      filtered = posts.filter(p => {
+        const hay = [
+          p.title, p.excerpt,
+          ...(p.categories||[]),
+          ...(p.tags||[])
+        ].join(" ").toLowerCase();
+        return hay.includes(query);
+      });
+      page = 1;
+      render();
+      hydrateFooter();
+    }
+
+    // ---------- Sidebar lists ----------
+    function renderSidebar(){
+      $("#popularList").innerHTML = popular.map(name =>
+        `<li><a href="#" onclick="filterBy('${escapeHtml(name)}');return false;">${escapeHtml(name)} <span>↗</span></a></li>`
+      ).join("");
+
+      $("#trendingList").innerHTML = trending.map(name =>
+        `<li><a href="#" onclick="filterBy('${escapeHtml(name)}');return false;">${escapeHtml(name)} <span>↗</span></a></li>`
+      ).join("");
+    }
+
+    // ---------- Footer hydration ----------
+    function hydrateFooter(){
+      const topPopular = popular.slice(0,7).map(n => `<a href="#" onclick="filterBy('${escapeHtml(n)}');return false;">${escapeHtml(n)}</a>`).join("");
+      $("#footerPopular").innerHTML = topPopular;
+
+      const latest = [...posts]
+        .sort((a,b) => b.date.localeCompare(a.date))
+        .slice(0,7)
+        .map(p => `<a href="#" onclick="alert('Open post stub');return false;">${escapeHtml(p.title)}</a>`)
+        .join("");
+
+      $("#footerLatest").innerHTML = latest;
+    }
+
+    // ---------- Simple route stubs ----------
+    function routeTo(route){
+      // In real project: swap templates / fetch by route / change URL
+      document.querySelectorAll(".nav a").forEach(a => a.classList.remove("active"));
+      const active = document.querySelector(`.nav a[data-route="${route}"]`);
+      if(active) active.classList.add("active");
+
+      if(route === "search"){
+        $("#q").focus();
+      } else if(route === "latest"){
+        // sort by date desc
+        filtered = [...posts].sort((a,b) => b.date.localeCompare(a.date));
+        page = 1;
+        $("#q").value = "";
+        render();
+        hydrateFooter();
+      } else if(route === "games"){
+        alert("Games page stub. Implement taxonomy grid here.");
+      } else if(route === "about"){
+        alert("About page stub.");
+      } else if(route === "cookie"){
+        alert("Cookie policy stub.");
+      } else {
+        // home: default ordering (as-is)
+        filtered = [...posts];
+        page = 1;
+        $("#q").value = "";
+        render();
+        hydrateFooter();
+      }
+    }
+    window.routeTo = routeTo;
+
+    // ---------- Init ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      $("#year").textContent = new Date().getFullYear();
+
+      renderSidebar();
+      hydrateFooter();
+      render();
+
+      $("#q").addEventListener("input", (e) => applySearch(e.target.value));
+
+      // mobile nav toggle
+      $("#burger").addEventListener("click", () => {
+        $("#nav").classList.toggle("open");
+      });
+
+      // nav route clicks
+      document.querySelectorAll(".nav a").forEach(a => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          routeTo(a.dataset.route);
+        });
+      });
     });
-  };
-
-  searchInput.addEventListener('input', (e) => {
-    searchTerm = e.target.value;
-    renderGames();
-  });
-
-  navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      navButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-      currentFilter = button.dataset.filter;
-      renderGames();
-    });
-  });
-
-  // Initial render
-  renderGames();
-});

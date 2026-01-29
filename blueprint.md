@@ -1,38 +1,41 @@
-# Project Blueprint: Slot Game Aggregator
+# Project Blueprint: Freebies Hub
 
 ## Overview
 
-This project aims to create a web application that replicates the core functionality and visual style of `https://slotfreebies.com/`. The application will serve as a directory for online slot games, presented in a visually engaging and modern interface.
+This project creates a clean, fast, and responsive blog-style web application for aggregating daily freebies for social casino and casual games. The design is light, modern, and information-focused, with a clear separation between the main content feed and a sidebar for navigation and widgets.
 
 ## Design & Features Outline
 
 ### 1. Visual Design (Aesthetics)
-*   **Theme:** Dark, vibrant, "casino-glow" aesthetic inspired by the reference site.
-*   **Color Palette:** A primary palette of dark purples and blacks, with glowing accents of pink, gold, and cyan for interactive elements.
-*   **Typography:** Expressive, bold fonts for headings and clear, readable fonts for body text.
-*   **Layout:** A responsive grid system is the core of the layout, displaying game cards.
-*   **Effects:** Multi-layered drop shadows for depth, "glow" effects on interactive elements, and subtle background textures.
+*   **Theme:** Light and clean. Uses a palette of whites, grays, and blues for a professional, easy-to-read interface.
+*   **Color Palette:** 
+    *   Background: `#f4f6f8`
+    *   Cards/Widgets: `#ffffff`
+    *   Text: `#1f2937`
+    *   Accent: `#2563eb`
+*   **Typography:** System UI fonts for native performance and readability.
+*   **Layout:** A responsive two-column layout featuring a main post feed and a sticky sidebar. Collapses to a single column on mobile.
+*   **Effects:** Subtle shadows (`--shadow`) for depth on cards and widgets. No glow effects.
 
 ### 2. Core Components
-*   **Header:** Contains the site logo, navigation filters, and a search bar.
-*   **Game Card (`<game-card>`):** A reusable Web Component displaying individual games with image and title. It features a "lifted" appearance with soft shadows and glow effects.
-*   **AdSense Slot:** A clearly marked placeholder component for future ad integration.
+*   **Header:** Sticky top-bar with logo, navigation links, and a prominent search bar.
+*   **Post Item:** A repeatable element in the feed, displaying a date box, title, excerpt, tags, and a primary "Collect" button.
+*   **Sidebar:** Contains widgets for popular/trending games and other metadata.
+*   **Footer:** Multi-column footer with navigation links and site information.
+*   **Pagination:** Numbered page navigation for the main feed.
 
 ### 3. Functionality
-*   **Dynamic Game Loading:** Games are loaded dynamically from a JavaScript data source.
-*   **Live Filtering:** Users can filter games by category ("All Games," "Newest," "Popular").
-*   **Live Search:** Users can search for games in real-time.
+*   **Dynamic Post Loading:** Posts are rendered from a JavaScript data source.
+*   **Pagination:** The feed is paginated, showing a limited number of posts per page.
+*   **Live Search/Filter:** The search bar filters posts in real-time by title, category, or tag.
+*   **Client-Side Routing Stubs:** Placeholder functions for navigating between different "pages" (Home, Games, About, etc.).
 
-## Current Plan: Phase 2 - Advanced Visual Enhancement
+## Current Plan: Phase 3 - Complete Overhaul to 'Freebies Hub' Design
 
-**Objective:** Transform the basic layout into a polished, professional-grade user interface.
+**Objective:** Replace the previous "dark-glow" theme entirely with the user-provided "light-blog" theme.
 
-1.  **[In Progress]** **Apply Advanced CSS:** Overhaul `style.css` to implement the full design vision.
-    *   **Background & Texture:** Apply a subtle noise texture over a dark, sophisticated background.
-    *   **Color & Glow:** Implement the full "casino-glow" color palette with vibrant accents and shadow effects on interactive elements.
-    *   **Typography:** Integrate Google Fonts (`Poppins` and `Roboto`) for clean and modern text.
-    *   **Card Redesign:** Re-style the game cards with multi-layered `box-shadow` for a "lifted" 3D effect, rounded corners, and smooth hover animations.
-    *   **Layout Refinement:** Enhance the grid layout for better spacing and alignment across different screen sizes.
-    *   **Button & Input Styling:** Give all buttons, filters, and the search bar a consistent, premium look and feel.
-2.  **Update HTML:** Modify `index.html` to import the selected Google Fonts.
-3.  **Final Review:** Push changes to GitHub to deploy and review the visually upgraded site.
+1.  **[In Progress]** **Deconstruct & Reorganize:** Split the provided single HTML file into three separate, clean files: `index.html` (structure), `style.css` (presentation), and `main.js` (logic).
+2.  **Overwrite `index.html`:** Replace the existing HTML body with the new, more complex structure including the header, main container (feed + sidebar), and footer.
+3.  **Overwrite `style.css`:** Replace all previous CSS with the new light-theme styles.
+4.  **Overwrite `main.js`:** Replace the previous Web Component and filtering logic with the new, comprehensive script that includes data, rendering, pagination, and routing.
+5.  **Deploy & Verify:** Push all changes to GitHub to deploy the completely new site design and verify its appearance and functionality.
