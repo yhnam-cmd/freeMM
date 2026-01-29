@@ -1,14 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>Slot Game Aggregator</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+     crossorigin="anonymous"></script>
+  <link href="/style.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
+  <header class="site-header">
+    <div class="logo">SLOTFREEBIES</div>
+    <nav class="site-nav">
+      <button class="nav-button active" data-filter="all">All Games</button>
+      <button class="nav-button" data-filter="newest">Newest</button>
+      <button class="nav-button" data-filter="popular">Popular</button>
+    </nav>
+    <div class="search-container">
+      <input type="search" id="search-input" placeholder="Search games...">
+    </div>
+  </header>
+  <main class="site-main">
+    <!-- Game cards will be dynamically inserted here -->
+  </main>
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
