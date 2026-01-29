@@ -2,71 +2,76 @@
 
 ## 1. Project Overview
 
-**Purpose:** A web application that aggregates and provides the latest freebies (coins, spins, credits) for popular social casino and mobile games. The primary goal is to create a user-friendly, high-value content site that is eligible for and monetized by Google AdSense.
+**Purpose:** A web application that aggregates and provides the latest freebies for popular social & mobile games. The primary goal is to create a user-friendly, high-value content site optimized for search engines and monetized by Google AdSense.
 
 **Target Audience:** Players of social casino and mobile games looking for daily rewards.
 
-**Key Challenge:** To move beyond a simple link aggregator and create a platform with unique, high-quality content that satisfies both users and Google's AdSense program requirements.
+---
+
+## 2. Core Features & Design Philosophy
+
+This section documents the foundational features and the guiding principles behind them.
+
+### Application & Design
+*   **Tech Stack:** Modern, framework-less HTML, CSS, and JavaScript for optimal performance and maintainability.
+*   **Layout:** A responsive main grid layout with a primary content area and a sidebar for supplementary information (widgets).
+*   **Routing:** A client-side router in `main.js` handles seamless view transitions without full page reloads.
+*   **Data:** Game and post information is managed via a static `posts.json` file, allowing for easy updates.
+
+### Content & User Experience
+*   **Homepage:** A feed that prioritizes posts with active reward links, followed by the latest content, ensuring users see the most valuable information first.
+*   **Post Details:** Each game has a detail page showing specific reward links.
+*   **Essential Pages:** Includes `About`, `Privacy Policy`, and `Contact` pages to build trust and meet AdSense requirements.
+*   **Monetization & Compliance:** Integrated with Google AdSense and a CookieYes Consent Management Platform.
 
 ---
 
-## 2. Current Implemented Features (as of Initial Blueprint)
+## 3. User Acquisition & SEO Strategy
 
-This section documents the foundational features that have been implemented so far.
+This is the strategic plan to attract users from search engines and provide clear, valuable navigation pathways within the site.
 
-### Core Application Structure
+### A. Technical SEO Foundation
 
-*   **Frontend:** Built with modern, framework-less HTML, CSS, and JavaScript.
-*   **Routing:** A simple client-side router in `main.js` handles navigation between different views (e.g., home, post details).
-*   **UI Components:**
-    *   Homepage feed (`#feed-view`) to display a list of game freebies.
-    *   Single post detail view (`#post-view`) for future content expansion.
-    *   Responsive design for mobile and desktop.
-    *   Dynamic sidebar for popular and trending content.
+*Objective: Ensure search engines can efficiently crawl, index, and understand our site structure.*
 
-### Essential Pages & Policies
+1.  **`sitemap.xml` Creation:**
+    *   **Action:** Generate and add a `sitemap.xml` file to the project root.
+    *   **Content:** This sitemap will list the URLs for all critical pages: the homepage, static pages (`about.html`, `privacy.html`), and—most importantly—a unique, crawlable URL for every single game post.
+2.  **`robots.txt` Implementation:**
+    *   **Action:** Create a `robots.txt` file.
+    *   **Content:** This file will instruct search engine crawlers on which parts of the site to access and will point them to the location of the `sitemap.xml` for efficient discovery.
+3.  **Dynamic Meta Tags:**
+    *   **Action:** Enhance the client-side router in `main.js`.
+    *   **Functionality:** When a user navigates to a game's detail page, the script will dynamically update the document's `<title>` and `<meta name="description">`. 
+    *   **Example:** Viewing the 'Slotomania' post will set the title to `Slotomania Free Coins & Rewards | SF Freebies Hub` and generate a relevant description, making each post a unique entry point from search results.
 
-*   **About Page (`about.html`):** Explains the site's mission and what it does.
-*   **Privacy Policy Page (`privacy.html`):** Standard privacy policy, a key requirement for AdSense.
-*   **Contact Page (`contact.html`):** Provides a way for users to get in touch.
+### B. Feature-Driven SEO & UX
 
-### Monetization & Compliance
+*Objective: Create dedicated features that improve user experience and create more content-rich pages for search engines to rank.*
 
-*   **Google AdSense Integration:** AdSense script (`adsbygoogle.js`) has been added to the `<head>` of all user-facing HTML files (`index.html`, `about.html`, `privacy.html`, `contact.html`).
-*   **Consent Management Platform (CMP):** CookieYes script is integrated to manage user consent for cookies, fulfilling GDPR and other privacy regulation requirements.
+1.  **"Games" Tab - The Game Directory:**
+    *   **Plan:** Create a new view/page dedicated to showcasing all games the site covers.
+    *   **Implementation:** It will render a grid of game cards, sorted alphabetically. Each card will display the game's logo and name, linking directly to its detail page. 
+    *   **SEO Value:** Creates a content-rich hub page that links to all individual game pages, improving the site's internal linking structure.
+
+2.  **"Search" Tab - Dedicated Search Experience:**
+    *   **Plan:** Implement a full-page search interface.
+    *   **Implementation:** This page will feature a prominent search bar. In the future, it can be expanded with advanced filters (e.g., by category, tags).
+    *   **SEO Value:** While not directly a ranking factor, a good search experience keeps users on the site longer, which is a positive signal to search engines.
+
+### C. Content Strategy
+
+*Objective: Solidify our position as a valuable resource through high-quality, unique content.*
+
+*   **Unique Descriptions:** Continue the established practice of writing original, helpful descriptions for every game post. This is the single most important factor for On-Page SEO.
+*   **Keyword Optimization:** Naturally integrate user-searched terms (e.g., "free dice," "daily spins") into titles, excerpts, and descriptions.
 
 ---
 
-## 3. The Path Forward: Content Enhancement Plan
+## 4. Current Task: Layout & Sorting Fix
 
-This section outlines the strategic steps to transform the site into a high-value content platform, crucial for AdSense approval and long-term success.
-
-### Step 1: Implement Game-Specific Detail Pages (The Core Task)
-
-*   **Objective:** Move from a simple list of links to rich, informative pages for each game.
-*   **Actionable Steps:**
-    1.  **Create a `GameDetail` Web Component:** Develop a reusable web component to structure the content for each game's detail page.
-    2.  **Dynamic Content Rendering:** When a user clicks on a game in the feed, the router will:
-        *   Hide the main feed view (`#feed-view`).
-        *   Display the detail view (`#post-view`).
-        *   Dynamically inject the `GameDetail` component, populated with the specific game's data.
-    3.  **Content Requirements for Each Page:**
-        *   **Unique Game Description:** A well-written, original paragraph describing the game's theme, gameplay, and why it's popular. **This is not to be copied from other sites.**
-        *   **Game-Specific Imagery:** A high-quality banner or screenshot for the game.
-        *   **Organized Freebie Links:** A clear, updated list of the latest freebie links for that game, with dates.
-*   **Success Metric:** A user can navigate from the homepage to a detailed page for any game, which contains unique, helpful content beyond just a list of links.
-
-### Step 2: Homepage Redesign for Better User Engagement
-
-*   **Objective:** Make the homepage more dynamic and engaging.
-*   **Actionable Steps:**
-    1.  **"Featured Game" Section:** Add a prominent section at the top of the homepage to highlight a specific game.
-    2.  **"Recently Added" Feed:** Create a chronological list of the latest freebie links added across all games.
-
-### Step 3: Author and Publish Unique Content
-
-*   **Objective:** Create the actual written content required for the detail pages. This is the most critical part for AdSense approval.
-*   **Actionable Steps:**
-    1.  **Research and Write:** For each game in the `games.json` file, write a unique, engaging description.
-    2.  **Gather Imagery:** Find or create appropriate images for each game.
-    3.  **Populate the `games.json`:** Add new fields to the `games.json` data structure to hold these descriptions and image URLs.
+*   **Objective:** Stabilize the application after recent updates.
+*   **Completed Steps:**
+    1.  **Fix Layout:** Corrected the main grid layout in `index.html` and `style.css` to prevent the content area and sidebar from overlapping.
+    2.  **Implement Link-First Sorting:** Updated `main.js` to sort the main feed, ensuring posts with real reward links appear at the top, followed by other posts sorted by date.
+    3.  **Resolve JS Errors:** Corrected a critical syntax error in `main.js` that was preventing the entire application from rendering.

@@ -6,6 +6,7 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO Meta Tags will be dynamically updated by JS -->
   <title>SF Freebies Hub - Daily Game Rewards</title>
   <meta name="description" content="Your one-stop hub for daily freebies, coins, spins, and rewards for your favorite online games.">
   <link rel="stylesheet" href="style.css">
@@ -23,8 +24,6 @@
         <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
         <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
         <a href="/about.html" data-route="about">About</a>
-        <a href="/privacy.html" data-route="privacy">Privacy Policy</a>
-        <a href="/contact.html" data-route="contact">Contact</a>
       </nav>
     <div class="header-right">
       <div class="search-container">
@@ -52,8 +51,29 @@
           </div>
 
           <!-- Post Detail View -->
-          <div id="post-view">
+          <div id="post-view" style="display: none;">
               <!-- JS will inject single post here -->
+          </div>
+
+          <!-- Games Directory View -->
+          <div id="games-view" style="display: none;">
+            <h1 class="view-title">All Games</h1>
+            <p class="view-intro">Browse all the games we cover, listed alphabetically.</p>
+            <div id="games-grid" class="games-grid">
+                <!-- JS will inject game cards here -->
+            </div>
+          </div>
+
+          <!-- Search View -->
+          <div id="search-view" style="display: none;">
+            <h1 class="view-title">Search</h1>
+            <p class="view-intro">Find exactly what you're looking for.</p>
+            <div class="search-page-container">
+              <input type="search" id="search-page-input" placeholder="Enter a game or keyword..." autocomplete="off">
+            </div>
+            <div id="search-results-container" class="feed">
+              <!-- JS will inject search results here -->
+            </div>
           </div>
       </div>
 

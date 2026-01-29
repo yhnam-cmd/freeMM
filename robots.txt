@@ -1,0 +1,1 @@
+# Allow all user-agents to crawl the site\nUser-agent: *\nAllow: /\n\n# Point to the sitemap for efficient crawling\nSitemap: https://sf-freebies-hub.web.app/sitemap.xml\n
