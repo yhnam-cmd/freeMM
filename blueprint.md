@@ -1,47 +1,72 @@
 # Project Blueprint: Freebies Hub
 
-## Overview
+## 1. Project Overview
 
-This project creates a clean, fast, and responsive web application for aggregating daily freebies for social casino and casual games. The primary goal is to provide a user-friendly experience, achieve AdSense approval through high-quality, original content, and ensure compliance with modern web standards and privacy regulations.
+**Purpose:** A web application that aggregates and provides the latest freebies (coins, spins, credits) for popular social casino and mobile games. The primary goal is to create a user-friendly, high-value content site that is eligible for and monetized by Google AdSense.
 
-## Monetization & AdSense Readiness Plan
+**Target Audience:** Players of social casino and mobile games looking for daily rewards.
 
-To achieve AdSense approval and build a sustainable project, we will focus on three core areas:
+**Key Challenge:** To move beyond a simple link aggregator and create a platform with unique, high-quality content that satisfies both users and Google's AdSense program requirements.
 
-### Phase 1: CMP (Consent Management Platform) & Compliance
-*   **Goal:** Implement a Consent Management Platform to comply with GDPR, CCPA, and other privacy regulations. This builds trust with users and is a critical requirement for monetization.
-*   **Action:** Integrate a third-party CMP service (e.g., Osano, CookieYes) and create a comprehensive Privacy Policy page.
+---
 
-### Phase 2: Essential Page Creation
-*   **Goal:** Establish the website's credibility and structure by creating essential informational pages.
-*   **Pages:**
-    *   **/about.html:** Introduce the mission and purpose of the site.
-    *   **/privacy.html:** Detail the data handling and cookie policies.
-    *   **/contact.html:** Provide a way for users to get in touch.
+## 2. Current Implemented Features (as of Initial Blueprint)
 
-### Phase 3: Content Enrichment
-*   **Goal:** Move beyond simple link aggregation to provide unique, valuable, and original content that AdSense reviewers and users will appreciate.
-*   **Content Types:**
-    *   **Expanded Post Details:** Each game's page will include unique content like game reviews, tips, and strategy guides.
-    *   **Editorial Blog Posts:** Publish articles like "Top 5 Social Casino Games of the Year" or "How to Maximize Your Daily Freebies."
+This section documents the foundational features that have been implemented so far.
 
-## Current Plan: Foundational Pages Setup
+### Core Application Structure
 
-This sprint focuses on establishing the structural foundation required for Phase 1 and 2.
+*   **Frontend:** Built with modern, framework-less HTML, CSS, and JavaScript.
+*   **Routing:** A simple client-side router in `main.js` handles navigation between different views (e.g., home, post details).
+*   **UI Components:**
+    *   Homepage feed (`#feed-view`) to display a list of game freebies.
+    *   Single post detail view (`#post-view`) for future content expansion.
+    *   Responsive design for mobile and desktop.
+    *   Dynamic sidebar for popular and trending content.
 
-1.  **Update Blueprint:** The `blueprint.md` file has been updated with the new AdSense readiness goals.
-2.  **Create Placeholder Pages:** Create the basic HTML structure for `about.html`, `privacy.html`, and `contact.html`.
-3.  **Update Navigation:** Add links to the new pages in the main header and footer navigation in `index.html`.
+### Essential Pages & Policies
 
-## Design & Features Outline
+*   **About Page (`about.html`):** Explains the site's mission and what it does.
+*   **Privacy Policy Page (`privacy.html`):** Standard privacy policy, a key requirement for AdSense.
+*   **Contact Page (`contact.html`):** Provides a way for users to get in touch.
 
-### 1. Visual Design (Aesthetics)
-*   **Theme:** A premium, dark-mode theme.
-*   **Color Palette:**
-    *   Background: `#111827` (Dark Slate Blue)
-    *   Cards/Widgets: `#1f2937` (Slightly lighter Slate)
-    *   Text: `#e5e7eb` (Light Gray)
-    *   Accent: `#3b82f6` (Vibrant Blue)
-*   **Typography:** System UI fonts for native performance.
-*   **Layout:** A responsive two-column layout featuring a main post feed and a sticky sidebar.
-*   **Effects:** Multi-layered drop shadows for depth, glowing interactive elements, and a subtle noise texture on the background for a premium feel.
+### Monetization & Compliance
+
+*   **Google AdSense Integration:** AdSense script (`adsbygoogle.js`) has been added to the `<head>` of all user-facing HTML files (`index.html`, `about.html`, `privacy.html`, `contact.html`).
+*   **Consent Management Platform (CMP):** CookieYes script is integrated to manage user consent for cookies, fulfilling GDPR and other privacy regulation requirements.
+
+---
+
+## 3. The Path Forward: Content Enhancement Plan
+
+This section outlines the strategic steps to transform the site into a high-value content platform, crucial for AdSense approval and long-term success.
+
+### Step 1: Implement Game-Specific Detail Pages (The Core Task)
+
+*   **Objective:** Move from a simple list of links to rich, informative pages for each game.
+*   **Actionable Steps:**
+    1.  **Create a `GameDetail` Web Component:** Develop a reusable web component to structure the content for each game's detail page.
+    2.  **Dynamic Content Rendering:** When a user clicks on a game in the feed, the router will:
+        *   Hide the main feed view (`#feed-view`).
+        *   Display the detail view (`#post-view`).
+        *   Dynamically inject the `GameDetail` component, populated with the specific game's data.
+    3.  **Content Requirements for Each Page:**
+        *   **Unique Game Description:** A well-written, original paragraph describing the game's theme, gameplay, and why it's popular. **This is not to be copied from other sites.**
+        *   **Game-Specific Imagery:** A high-quality banner or screenshot for the game.
+        *   **Organized Freebie Links:** A clear, updated list of the latest freebie links for that game, with dates.
+*   **Success Metric:** A user can navigate from the homepage to a detailed page for any game, which contains unique, helpful content beyond just a list of links.
+
+### Step 2: Homepage Redesign for Better User Engagement
+
+*   **Objective:** Make the homepage more dynamic and engaging.
+*   **Actionable Steps:**
+    1.  **"Featured Game" Section:** Add a prominent section at the top of the homepage to highlight a specific game.
+    2.  **"Recently Added" Feed:** Create a chronological list of the latest freebie links added across all games.
+
+### Step 3: Author and Publish Unique Content
+
+*   **Objective:** Create the actual written content required for the detail pages. This is the most critical part for AdSense approval.
+*   **Actionable Steps:**
+    1.  **Research and Write:** For each game in the `games.json` file, write a unique, engaging description.
+    2.  **Gather Imagery:** Find or create appropriate images for each game.
+    3.  **Populate the `games.json`:** Add new fields to the `games.json` data structure to hold these descriptions and image URLs.
