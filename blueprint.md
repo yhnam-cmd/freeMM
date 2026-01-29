@@ -15,7 +15,7 @@ This project creates a clean, fast, and responsive blog-style web application fo
     *   Accent: `#2563eb`
 *   **Typography:** System UI fonts for native performance and readability.
 *   **Layout:** A responsive two-column layout featuring a main post feed and a sticky sidebar. Collapses to a single column on mobile.
-*   **Effects:** Subtle shadows (`--shadow`) for depth on cards and widgets. No glow effects.
+*   **Effects:** Subtle shadows (`--shadow`) for depth on cards and widgets.
 
 ### 2. Core Components
 *   **Header:** Sticky top-bar with logo, navigation links, and a prominent search bar.
@@ -28,14 +28,12 @@ This project creates a clean, fast, and responsive blog-style web application fo
 *   **Dynamic Post Loading:** Posts are rendered from a JavaScript data source.
 *   **Pagination:** The feed is paginated, showing a limited number of posts per page.
 *   **Live Search/Filter:** The search bar filters posts in real-time by title, category, or tag.
+*   **Functional Links:** All "Collect Freebies" buttons now link directly to the corresponding page on the original `slotfreebies.com` website, making the app immediately useful.
 *   **Client-Side Routing Stubs:** Placeholder functions for navigating between different "pages" (Home, Games, About, etc.).
 
-## Current Plan: Phase 3 - Complete Overhaul to 'Freebies Hub' Design
+## Current Plan: Phase 4 - Make Links Functional
 
-**Objective:** Replace the previous "dark-glow" theme entirely with the user-provided "light-blog" theme.
+**Objective:** Update the placeholder links in the JavaScript data source to point to real, functional URLs from the original `slotfreebies.com` website.
 
-1.  **[In Progress]** **Deconstruct & Reorganize:** Split the provided single HTML file into three separate, clean files: `index.html` (structure), `style.css` (presentation), and `main.js` (logic).
-2.  **Overwrite `index.html`:** Replace the existing HTML body with the new, more complex structure including the header, main container (feed + sidebar), and footer.
-3.  **Overwrite `style.css`:** Replace all previous CSS with the new light-theme styles.
-4.  **Overwrite `main.js`:** Replace the previous Web Component and filtering logic with the new, comprehensive script that includes data, rendering, pagination, and routing.
-5.  **Deploy & Verify:** Push all changes to GitHub to deploy the completely new site design and verify its appearance and functionality.
+1.  **[In Progress]** **Update `main.js` Data:** Modify the `posts` array in `main.js`. Change the `ctaHref` property for each post from `"#"` to the specific URL of the corresponding game's page on `slotfreebies.com`.
+2.  **Deploy & Verify:** Push the updated `main.js` file to GitHub to deploy the changes. Verify that clicking the "Collect Freebies" buttons correctly redirects users to the external site.
