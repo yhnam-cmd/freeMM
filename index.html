@@ -4,25 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Slot Game Aggregator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
      crossorigin="anonymous"></script>
   <link href="/style.css" rel="stylesheet">
 </head>
 <body>
-  <header class="site-header">
-    <div class="logo">SLOTFREEBIES</div>
-    <nav class="site-nav">
-      <button class="nav-button active" data-filter="all">All Games</button>
-      <button class="nav-button" data-filter="newest">Newest</button>
-      <button class="nav-button" data-filter="popular">Popular</button>
-    </nav>
-    <div class="search-container">
-      <input type="search" id="search-input" placeholder="Search games...">
+
+  <header>
+    <div class="controls">
+      <button class="filter-btn active" data-filter="all">All Games</button>
+      <button class="filter-btn" data-filter="newest">Newest</button>
+      <button class="filter-btn" data-filter="popular">Popular</button>
+      <div class="search-bar">
+        <input type="search" id="search-input" placeholder="Search games...">
+      </div>
     </div>
   </header>
-  <main class="site-main">
-    <!-- Game cards will be dynamically inserted here -->
+
+  <main id="game-grid">
+    <!-- Game cards and ad placeholders will be dynamically inserted here -->
   </main>
+
   <script defer type="text/javascript" src="/main.js"></script>
+
 </body>
 </html>

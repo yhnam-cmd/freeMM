@@ -1,97 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@900&display=swap');
 
+/* GENERAL STYLES */
 :root {
-  --background-color: #1a0c2e;
-  --primary-glow: #ff00ff;
-  --secondary-glow: #00ffff;
-  --text-color: #ffffff;
-  --card-background: #2a1a4a;
-  --font-display: 'Orbitron', sans-serif;
-  --font-body: 'Roboto', sans-serif;
+  --background-color: #1a1a1a;
+  --card-background: #2c2c2c;
+  --primary-glow: #ff00ff; /* Magenta */
+  --secondary-glow: #00ffff; /* Cyan */
+  --text-color: #f0f0f0;
+  --text-muted: #a0a0a0;
+  --border-radius: 12px;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --font-main: 'Poppins', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
 }
 
 body {
+  font-family: var(--font-secondary);
   background-color: var(--background-color);
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY2bm5uPj4+ZmZmOjo6JiYmNjY2Pi4uKioqWlpaVlZWNjY2Rg4OMjY2Mjo5w8G+GAAAAF3RSTlMFn9CL3A5Q09f3p7vL9a3g3NCX2JHj2nevAAAAxElEQVRIx82XyRKCMBBE37yLwYwNl3/5/z+wK4sKBCjjn0+fTu6M6hI/VPAzmhgeLw7IChbBTLIKCyDGCgL0EYAghso5Qc4s0YCAQ4iHhYh3IohD/wG8w+BxbGoA3N3h+1eAbsS/jssN0V0D3h+7lAbw/cnHh6eFp4eXh5eFh4WnhYnCw/nCR8E3wufCF8KXwj/Cr4TLgi/CV8Inwj/CP4Qvgj+ET4RPhB+E74QvgJ+E/4S/hH+Ev4bvgE+E34TfhN+E/4RvgG+E34TfhN+E34RnhJ+Er4SvhK+E/4Q/hC+ED4QvhC+ED4TPg8+Dz4PCh8KHwufCi8KbwevDm8HjwqvCr8LLwuvCi8LLwqfC58KXwuvCp8LXwufCV8KbwsfCz8LLwsfC58JnwufCZ8JnwmfCZ8JvwmfCZ8JnwmfCZ8JvwmfCZ8JvwmfCZ8JnwmfCZ8JvwmfCZ8JvwmfCZ8JvwmfCZ8JnwmfCZ8Jvwm/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/C58LnwhfC58KXwuvC58KnwhfCp8KXwqfCj8Jvws/Cz8JPwm/Cb8Jvwm/Cb8Jvwk/CT8JPwm/CT8Jvwk/CT8JPwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwm/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/C58LnwhfC58KXwuvC58KnwhfCp8KXwqfCj8Jvws/Cz8JPwm/Cb8Jvwm/Cb8Jvwk/CT8JPwm/CT8Jvwk/CT8JPwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwk/CT8Jvwm/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/Cf8J/wn/C5gAAAAAElFTkSuQmCC');
   color: var(--text-color);
-  font-family: var(--font-body);
   margin: 0;
-  padding: 1rem;
+  padding: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23333333' fill-opacity='0.1'%3E%3Crect x='0' y='0' width='100' height='1'/%3E%3Crect x='0' y='0' width='1' height='100'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* Header */
-.site-header {
+/* HEADER & CONTROLS */
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.controls {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
   gap: 1rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 2rem;
+  justify-content: center;
 }
 
-.logo {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--primary-glow);
-  text-shadow: 0 0 5px var(--primary-glow), 0 0 10px #fff;
-}
-
-.site-nav {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.nav-button {
-  font-family: var(--font-body);
-  background: transparent;
-  color: var(--text-color);
+.filter-btn, .search-bar input {
+  background-color: var(--card-background);
   border: 1px solid var(--secondary-glow);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  color: var(--text-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px var(--secondary-glow), 0 0 10px var(--secondary-glow) inset;
 }
 
-.nav-button.active, .nav-button:hover {
+.filter-btn:hover, .search-bar input:focus {
   background-color: var(--secondary-glow);
   color: var(--background-color);
-  font-weight: bold;
-  box-shadow: 0 0 15px var(--secondary-glow);
+  box-shadow: 0 0 10px var(--secondary-glow), 0 0 20px var(--secondary-glow);
 }
 
-.search-container input {
-  background-color: var(--card-background);
-  border: 1px solid var(--primary-glow);
-  color: var(--text-color);
-  padding: 0.6rem 1rem;
-  border-radius: 20px;
-  min-width: 250px;
+.filter-btn.active {
+    background-color: var(--primary-glow);
+    color: var(--background-color);
+    box-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
 }
 
-.search-container input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+.search-bar input::placeholder {
+  color: var(--text-muted);
 }
 
-/* Main Layout */
-.site-main {
+/* GAME GRID */
+#game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
 }
 
-/* Ad Placeholder */
-.ad-placeholder {
+/* WEB COMPONENTS */
+game-card, adsense-placeholder {
   background-color: var(--card-background);
-  border: 1px dashed var(--primary-glow);
-  min-height: 200px;
-  display: flex;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  display: flex; /* Ensures shadow is cast correctly */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px var(--shadow-color), 0 0 5px var(--primary-glow) inset;
+}
+
+game-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px var(--shadow-color), 0 0 15px var(--primary-glow) inset, 0 0 10px var(--primary-glow);
+}
+
+adsense-placeholder {
   align-items: center;
   justify-content: center;
-  color: var(--primary-glow);
-  font-family: var(--font-display);
-  border-radius: 12px;
-  text-align: center;
-}/* Test commit to trigger Cloudflare deployment */
+  min-height: 280px; /* Typical ad height */
+  border: 2px dashed var(--text-muted);
+  box-shadow: none;
+}

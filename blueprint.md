@@ -10,22 +10,29 @@ This project aims to create a web application that replicates the core functiona
 *   **Theme:** Dark, vibrant, "casino-glow" aesthetic inspired by the reference site.
 *   **Color Palette:** A primary palette of dark purples and blacks, with glowing accents of pink, gold, and cyan for interactive elements.
 *   **Typography:** Expressive, bold fonts for headings and clear, readable fonts for body text.
-*   **Layout:** A responsive grid system will be the core of the layout, displaying game cards.
+*   **Layout:** A responsive grid system is the core of the layout, displaying game cards.
 *   **Effects:** Multi-layered drop shadows for depth, "glow" effects on interactive elements, and subtle background textures.
 
 ### 2. Core Components
-*   **Header:** Will contain the site logo, navigation filters (e.g., "All Games," "Newest"), and a search bar.
-*   **Game Card (`<game-card>`):** A reusable Web Component to display individual games. Each card will show the game's image and title. It will feature a "lifted" appearance with soft shadows and a glow effect on hover.
-*   **Navigation/Filters:** Buttons or links that will eventually allow users to filter the games shown.
-*   **Search Bar:** An input field for searching games by name.
+*   **Header:** Contains the site logo, navigation filters, and a search bar.
+*   **Game Card (`<game-card>`):** A reusable Web Component displaying individual games with image and title. It features a "lifted" appearance with soft shadows and glow effects.
+*   **AdSense Slot:** A clearly marked placeholder component for future ad integration.
 
 ### 3. Functionality
-*   **Dynamic Game Loading:** Games will be loaded dynamically from a JavaScript data source (initially mock data).
-*   **Filtering (Future):** Users will be able to filter games by category.
-*   **Search (Future):** Users will be able to search for specific games.
+*   **Dynamic Game Loading:** Games are loaded dynamically from a JavaScript data source.
+*   **Live Filtering:** Users can filter games by category ("All Games," "Newest," "Popular").
+*   **Live Search:** Users can search for games in real-time.
 
-## Current Plan: Phase 1 - Basic Structure & Design
+## Current Plan: Phase 2 - Advanced Visual Enhancement
 
-1.  **[COMPLETED]** **`blueprint.md` Creation:** Document the project's overview, features, and step-by-step plan.
-2.  **HTML Structure:** Update `index.html` with semantic `header` and `main` tags to define the main layout areas.
-3.  **Initial Styling:** Update `style.css` to set the dark theme, background color, and prepare the main grid container.
+**Objective:** Transform the basic layout into a polished, professional-grade user interface.
+
+1.  **[In Progress]** **Apply Advanced CSS:** Overhaul `style.css` to implement the full design vision.
+    *   **Background & Texture:** Apply a subtle noise texture over a dark, sophisticated background.
+    *   **Color & Glow:** Implement the full "casino-glow" color palette with vibrant accents and shadow effects on interactive elements.
+    *   **Typography:** Integrate Google Fonts (`Poppins` and `Roboto`) for clean and modern text.
+    *   **Card Redesign:** Re-style the game cards with multi-layered `box-shadow` for a "lifted" 3D effect, rounded corners, and smooth hover animations.
+    *   **Layout Refinement:** Enhance the grid layout for better spacing and alignment across different screen sizes.
+    *   **Button & Input Styling:** Give all buttons, filters, and the search bar a consistent, premium look and feel.
+2.  **Update HTML:** Modify `index.html` to import the selected Google Fonts.
+3.  **Final Review:** Push changes to GitHub to deploy and review the visually upgraded site.
