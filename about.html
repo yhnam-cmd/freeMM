@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Freebies Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="/" onclick="routeTo('home'); return false;">SF <span>Freebies Hub</span></a>
+      <nav class="nav" id="nav">
+        <a href="/" data-route="home" onclick="routeTo('home'); return false;">Home</a>
+        <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
+        <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
+        <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
+        <a href="/about.html" data-route="about" class="active">About</a>
+        <a href="/privacy.html" data-route="cookie">Cookie Policy</a>
+      </nav>
+       <button id="burger" class="burger" aria-label="Open navigation">&#9776;</button>
+    </div>
+  </header>
+
+  <main class="container page-container">
+    <article class="post-full">
+        <h1>About Freebies Hub</h1>
+        <div class="post-body">
+            <p>Welcome to Freebies Hub, your number one source for daily freebies, coins, spins, and credits for your favorite social casino and mobile games.</p>
+            <h2>Our Mission</h2>
+            <p>Our mission is simple: to provide a clean, reliable, and user-friendly platform where gamers can easily find and claim the latest promotional links without hassle. We understand that keeping up with daily rewards can be a chore, so we do the hard work for you.</p>
+            <h2>What We Do</h2>
+            <p>We monitor the official social media channels and communities of popular games to aggregate all available freebie links in one convenient place. Our lists are updated regularly to ensure you never miss out on a reward.</p>
+            <p><em>This site is an independent entity and is not affiliated with any of the game developers mentioned. All game titles and trademarks are the property of their respective owners.</em></p>
+             <a class="btn-back" href="/" onclick="routeTo('home'); return false;" style="margin-top:2rem">← Back to Home</a>
+        </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+     <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Freebies Hub Info</h3>
+                <p>Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Info</h3>
+                <ul class="footer-links">
+                    <li><a href="/" onclick="routeTo('home'); return false;">Home</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
+                    <li><a href="/privacy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Popular Games</h3>
+                <div class="tag-cloud" id="footerPopular"></div>
+            </div>
+            <div class="footer-col">
+                <h3>Latest Game Freebies</h3>
+                 <div class="tag-cloud" id="footerLatest"></div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Your Company. All rights reserved.
+        </div>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

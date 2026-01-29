@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Freebies Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="/" onclick="routeTo('home'); return false;">SF <span>Freebies Hub</span></a>
+      <nav class="nav" id="nav">
+        <a href="/" data-route="home" onclick="routeTo('home'); return false;">Home</a>
+        <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
+        <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
+        <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
+        <a href="/about.html" data-route="about">About</a>
+        <a href="/privacy.html" data-route="cookie" class="active">Cookie Policy</a>
+      </nav>
+      <button id="burger" class="burger" aria-label="Open navigation">&#9776;</button>
+    </div>
+  </header>
+
+  <main class="container page-container">
+    <article class="post-full">
+        <h1>Privacy Policy</h1>
+        <div class="post-body">
+            <p>Your privacy is important to us. It is Freebies Hub's policy to respect your privacy regarding any information we may collect from you across our website.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.</p>
+            
+            <h2>2. Cookies</h2>
+            <p>We use cookies to help improve your experience of our website. A cookie is a small piece of data that our website stores on your computer, and accesses each time you visit, so we can understand how you use our site. This helps us serve you content based on preferences you have specified.</p>
+
+            <h2>3. Third-Party Services</h2>
+            <p>We may employ third-party companies and individuals on our websites – for example, analytics providers (like Google Analytics) and content partners (like ad networks). These third parties have access to your personal information only to perform specific tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+
+            <h2>4. Links To Other Sites</h2>
+            <p>Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and practices of these sites, and cannot accept responsibility or liability for their respective privacy policies.</p>
+
+            <h2>5. Your Rights</h2>
+            <p>You are free to refuse our request for your personal information, with the understanding that we may be unable to provide you with some of your desired services. Your continued use of our website will be regarded as acceptance of our practices around privacy and personal information.</p>
+
+            <p>This policy is effective as of 1 January 2024.</p>
+             <a class="btn-back" href="/" onclick="routeTo('home'); return false;" style="margin-top:2rem">← Back to Home</a>
+        </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+     <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Freebies Hub Info</h3>
+                <p>Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Info</h3>
+                <ul class="footer-links">
+                    <li><a href="/" onclick="routeTo('home'); return false;">Home</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
+                    <li><a href="/privacy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Popular Games</h3>
+                <div class="tag-cloud" id="footerPopular"></div>
+            </div>
+            <div class="footer-col">
+                <h3>Latest Game Freebies</h3>
+                 <div class="tag-cloud" id="footerLatest"></div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Your Company. All rights reserved.
+        </div>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
