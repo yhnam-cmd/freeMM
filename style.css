@@ -38,7 +38,6 @@ ul { list-style: none; padding: 0; margin: 0; }
 
 /* ---------- FEATURED GAME ---------- */
 .featured-game {
-  grid-column: 1 / -1; /* Span across all grid columns */
   border-radius: var(--radius);
   border: 1px solid var(--border);
   margin-bottom: 18px;
@@ -119,7 +118,9 @@ ul { list-style: none; padding: 0; margin: 0; }
 .burger { display: none; background: none; border: none; color: var(--text); font-size: 24px; }
 
 /* ---------- LAYOUT ---------- */
-.container { max-width: var(--container); margin: 18px auto 28px; padding: 0 16px; display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; }
+.container { max-width: var(--container); margin: 18px auto 28px; padding: 0 16px; }
+.main-grid { display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; }
+.content-area { /* This will hold the feed or the single post */ }
 
 /* ---------- FEED VIEW ---------- */
 .feed { /* container for posts */ }
@@ -197,7 +198,7 @@ ul { list-style: none; padding: 0; margin: 0; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
-  .container { grid-template-columns: 1fr; }
+  .main-grid { grid-template-columns: 1fr; }
   .sidebar { position: static; }
 }
 @media (max-width: 768px) {
@@ -207,6 +208,7 @@ ul { list-style: none; padding: 0; margin: 0; }
   .header-right { gap: 8px; }
   #q { min-width: 120px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .featured-content { max-width: 80%; }
 }
 @media (max-width: 480px) {
     .post { grid-template-columns: 1fr; }

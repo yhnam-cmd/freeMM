@@ -6,7 +6,8 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Freebies Hub</title>
+  <title>SF Freebies Hub - Daily Game Rewards</title>
+  <meta name="description" content="Your one-stop hub for daily freebies, coins, spins, and rewards for your favorite online games.">
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
 </head>
@@ -17,14 +18,14 @@
       <a href="/" onclick="routeTo('home'); return false;"><span>SF</span> Freebies Hub</a>
     </div>
     <nav id="nav" class="nav">
-      <a href="/" data-route="home" class="active" onclick="routeTo('home'); return false;">Home</a>
-      <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
-      <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
-      <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
-      <a href="/about.html" data-route="about">About</a>
-      <a href="/privacy.html" data-route="privacy">Privacy Policy</a>
-      <a href="/contact.html" data-route="contact">Contact</a>
-    </nav>
+        <a href="/" data-route="home" class="active" onclick="routeTo('home'); return false;">Home</a>
+        <a href="#" data-route="games" onclick="routeTo('games'); return false;">Games</a>
+        <a href="#" data-route="search" onclick="routeTo('search'); return false;">Search</a>
+        <a href="#" data-route="latest" onclick="routeTo('latest'); return false;">Latest</a>
+        <a href="/about.html" data-route="about">About</a>
+        <a href="/privacy.html" data-route="privacy">Privacy Policy</a>
+        <a href="/contact.html" data-route="contact">Contact</a>
+      </nav>
     <div class="header-right">
       <div class="search-container">
         <input type="search" id="q" placeholder="Search freebies..." autocomplete="off">
@@ -36,79 +37,50 @@
   </header>
 
   <main class="container">
-
-    <!-- Featured Game Section -->
-    <section id="featured-game" class="featured-game" style="display: none;">
-      <div class="featured-content">
-        <h1 class="featured-title"></h1>
-        <p class="featured-excerpt"></p>
-        <a href="#" class="btn featured-btn">View Rewards →</a>
-      </div>
-    </section>
-
-    <div class="content-area">
-
-        <!-- View 1: Feed/List of Posts -->
-        <div id="feed-view">
-            <div id="feed" class="feed"></div>
-            <nav id="pager" class="pager"></nav>
-        </div>
-
-        <!-- View 2: Single Post Details -->
-        <div id="post-view" style="display: none;">
-            <!-- Content will be injected by JavaScript -->
-        </div>
-
+    <div class="featured-game" id="featured-game">
+      <!-- JS injects featured game here -->
     </div>
+    
+    <div class="main-grid">
+      <div class="content-area">
+          <!-- Feed View (Main List) -->
+          <div id="feed-view">
+              <div class="feed" id="feed-container">
+                  <!-- JS will inject posts here -->
+              </div>
+              <div class="pager" id="pager"></div>
+          </div>
 
-    <aside class="sidebar">
-      <div class="widget">
-        <h3 class="widget-title">Popular Freebies</h3>
-        <ul id="popularList" class="widget-list"></ul>
+          <!-- Post Detail View -->
+          <div id="post-view">
+              <!-- JS will inject single post here -->
+          </div>
       </div>
-      <div class="widget">
-        <h3 class="widget-title">Trending Freebies</h3>
-        <ul id="trendingList" class="widget-list"></ul>
-      </div>
-      <div class="widget">
-        <h3 class="widget-title">Share</h3>
-        <p class="widget-text">Social share placeholder (cookie-consent dependent).</p>
-        <div class="share-buttons">
-          <a href="#" class="share-btn">Facebook</a>
-          <a href="#" class="share-btn">X</a>
-          <a href="#" class="share-btn">Reddit</a>
+
+      <aside class="sidebar">
+        <div class="widget">
+          <h3 class="widget-title">Welcome!</h3>
+          <p class="widget-text">Your daily source for the best game freebies. Bookmark us and never miss a reward!</p>
         </div>
-      </div>
-    </aside>
+        <div class="widget">
+          <h3 class="widget-title">Categories</h3>
+          <div class="widget-list" id="widget-categories">
+            <!-- JS injects categories -->
+          </div>
+        </div>
+         <div class="widget">
+          <h3 class="widget-title">Tags</h3>
+          <div class="footer-tags widget-text" id="widget-tags">
+              <!-- JS injects tags -->
+          </div>
+        </div>
+      </aside>
+    </div>
   </main>
 
   <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>Freebies Hub Info</h4>
-        <p>Blog-style freebies aggregator layout. Replace content, hook up CMS/DB, and wire routes.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Info</h4>
-        <ul class="footer-links">
-          <li><a href="/" onclick="routeTo('home'); return false;">Home</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="#" onclick="routeTo('latest'); return false;">Latest</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Popular Games</h4>
-        <div id="footerPopular" class="footer-tags"></div>
-      </div>
-      <div class="footer-col">
-        <h4>Latest Game Freebies</h4>
-        <div id="footerLatest" class="footer-tags"></div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Your Company. All rights reserved.</p>
+     <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Freebies Hub. All rights reserved.</p>
     </div>
   </footer>
 
