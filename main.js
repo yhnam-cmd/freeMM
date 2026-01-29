@@ -11,6 +11,7 @@ let scrollPosition = 0;
 const $ = (s) => document.querySelector(s);
 const $feedView = $("#feed-view");
 const $postView = $("#post-view");
+const $featuredGame = $("#featured-game");
 
 // ---------- Utilities ----------
 const escapeHtml = (str) =>
@@ -49,6 +50,23 @@ async function loadData() {
 }
 
 // ---------- Rendering ----------
+function renderFeaturedGame() {
+    const featuredPost = allPosts[0]; // Use the first post as the featured one
+    if (!featuredPost) return;
+
+    // Assume posts have an 'image' property for the background
+    if (featuredPost.image) {
+        $featuredGame.style.backgroundImage = `url(${featuredPost.image})`;
+    }
+    
+    $(".featured-title").textContent = featuredPost.title;
+    $(".featured-excerpt").textContent = featuredPost.excerpt;
+    const btn = $(".featured-btn");
+    btn.onclick = () => { routeTo('post', { id: featuredPost.id }); return false; };
+
+    $featuredGame.style.display = 'block';
+}
+
 function renderFeed(){
   const total = filtered.length;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -153,12 +171,14 @@ function routeTo(route, params = {}){
     if (route === 'post') {
         scrollPosition = window.scrollY;
         $feedView.style.display = 'none';
+        $featuredGame.style.display = 'none';
         $postView.style.display = 'block';
         renderPostDetail(params.id);
         window.scrollTo(0, 0);
     } else {
         $feedView.style.display = 'block';
         $postView.style.display = 'none';
+        if(filtered.length > 0) $featuredGame.style.display = 'block';
         handleFeedRoute(route);
         window.scrollTo(0, scrollPosition);
         scrollPosition = 0; // Reset after use
@@ -214,6 +234,11 @@ function applySearch(query) {
     page = 1;
     renderFeed();
     hydrateFooter();
+    if(filtered.length > 0){
+        $featuredGame.style.display = 'block';
+    } else {
+        $featuredGame.style.display = 'none';
+    }
 }
 
 // ---------- Init & Event Listeners ----------
@@ -221,6 +246,7 @@ async function init() {
     await loadData();
     renderFeed();
     renderSidebar();
+    renderFeaturedGame();
     hydrateFooter();
 
     $("#q").addEventListener("input", (e) => applySearch(e.target.value));
@@ -229,6 +255,9 @@ async function init() {
     $("#burger").addEventListener("click", () => {
       $("#nav").classList.toggle("open");
     });
+    
+    // Set current year in footer
+    $("#year").textContent = new Date().getFullYear();
 }
 
 document.addEventListener("DOMContentLoaded", init);
