@@ -21,7 +21,7 @@ const escapeHtml = (str) =>
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
+    .replaceAll('\'', "&quot;")
     .replaceAll("'", "&#039;");
 
 function formatDateParts(iso) {
@@ -176,7 +176,7 @@ async function loadData() {
     allPosts = await res.json();
   } catch (e) {
     console.error("Data loading error:", e);
-    $container.innerHTML = `<p class=\"error\">Failed to load content. Please try again later.</p>`;
+    $container.innerHTML = `<p class="error">Failed to load content. Please try again later.</p>`;
   }
 }
 
@@ -202,18 +202,18 @@ function renderFeed() {
   let html = '';
   items.forEach((p, index) => {
     const { mon, day, year } = formatDateParts(p.date);
-    const cats = (p.categories || []).map(c => `<a href=\"#\" onclick=\"filterBy('${escapeHtml(c)}');return false;\">${escapeHtml(c)}</a>`).join(", ");
+    const cats = (p.categories || []).map(c => `<a href="#" onclick="filterBy('${escapeHtml(c)}');return false;">${escapeHtml(c)}</a>`).join(", ");
     html += `
-      <article class=\"post\">
-        <div class=\"datebox\" aria-label=\"Post date\">
-          <div class=\"mon\">${escapeHtml(mon)}</div>
-          <div class=\"day\">${escapeHtml(day)}</div>
-          <div class=\"year\">${escapeHtml(String(year))}</div>
+      <article class="post">
+        <div class="datebox" aria-label="Post date">
+          <div class="mon">${escapeHtml(mon)}</div>
+          <div class="day">${escapeHtml(day)}</div>
+          <div class="year">${escapeHtml(String(year))}</div>
         </div>
         <div>
-          <h2><a href=\"#\" onclick=\"routeTo('post', { id: '${p.id}' });return false;\">${escapeHtml(p.title)}</a></h2>
-          <p class=\"excerpt\">${escapeHtml(p.excerpt)}</p>
-          <div class=\"meta\">Posted in ${cats}</div>
+          <h2><a href="#" onclick="routeTo('post', { id: '${p.id}' });return false;">${escapeHtml(p.title)}</a></h2>
+          <p class="excerpt">${escapeHtml(p.excerpt)}</p>
+          <div class="meta">Posted in ${cats}</div>
         </div>
       </article>
     `;
@@ -229,25 +229,25 @@ function renderFeed() {
 function renderPager(totalPages) {
   let pages = [];
   for (let i = 1; i <= totalPages; i++) {
-    pages.push(`<a class=\"page ${i === page ? 'active' : ''}\" href=\"#\" onclick=\"gotoPage(${i});return false;\">${i}</a>`);
+    pages.push(`<a class="page ${i === page ? 'active' : ''}" href="#" onclick="gotoPage(${i});return false;">${i}</a>`);
   }
-  const next = page < totalPages ? `<a class=\"page\" href=\"#\" onclick=\"gotoPage(${page + 1});return false;\">Next »</a>` : "";
-  $("#pager").innerHTML = pages.join("") + (next ? ` <span style=\"flex:1\"></span> ${next}` : "");
+  const next = page < totalPages ? `<a class="page" href="#" onclick="gotoPage(${page + 1});return false;">Next »</a>` : "";
+  $("#pager").innerHTML = pages.join("") + (next ? ` <span style="flex:1"></span> ${next}` : "");
 }
 
 function renderPostDetail(id) {
   const post = allPosts.find(p => p.id === id);
   if (!post) {
-    $postView.innerHTML = `<p class=\"error\">Post not found.</p><button class=\"btn-back\" onclick=\"routeTo('home');\">← Back to list</button>`;
+    $postView.innerHTML = `<p class="error">Post not found.</p><button class="btn-back" onclick="routeTo('home');">← Back to list</button>`;
     return;
   }
   const { mon, day, year } = formatDateParts(post.date);
   
   const faqHtml = (post.links && post.links.length > 0) 
     ? (post.links || []).map(link => `
-        <div class=\"faq-item\">
+        <div class="faq-item">
             <p class="faq-q">Q: How do I claim ${escapeHtml(link.text)}?</p>
-            <p class="faq-a">A: <a href=\"#\" onclick=\"window.open('${escapeHtml(link.url)}', '_blank')\" class=\"btn-link-inline\">Click here to claim your reward!</a></p>
+            <p class="faq-a">A: <a href="#" onclick="window.open('${escapeHtml(link.url)}', '_blank')" class="btn-link-inline">Click here to claim your reward!</a></p>
         </div>
       `).join("")
     : '<p>No reward links available yet.</p>';
@@ -256,17 +256,17 @@ function renderPostDetail(id) {
   const relatedPostsHtml = renderRelatedPosts(post);
 
   $postView.innerHTML = `
-    <article class=\"post-full\">
-      <button class=\"btn-back\" onclick=\"routeTo('home');\">← Back to list</button>
+    <article class="post-full">
+      <button class="btn-back" onclick="routeTo('home');">← Back to list</button>
       <h1>${escapeHtml(post.title)}</h1>
-      <div class=\"meta-full\">Published on ${mon} ${day}, ${year}</div>
-      <div class=\"post-body\">
+      <div class="meta-full">Published on ${mon} ${day}, ${year}</div>
+      <div class="post-body">
         <img src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" class="post-full-image">
         <p>${escapeHtml(post.excerpt)}</p>
         <h3>Available Rewards (FAQ):</h3>
-        <div class=\"faq-container\">${faqHtml}</div>
+        <div class="faq-container">${faqHtml}</div>
         ${renderAd('post-detail')}
-        <div style=\"margin-top: 24px; text-align: center;\"><a href=\"#\" onclick=\"window.open('${escapeHtml(post.ctaHref)}', '_blank')\" class=\"featured-btn\">Visit Official Site</a></div>
+        <div style="margin-top: 24px; text-align: center;"><a href="#" onclick="window.open('${escapeHtml(post.ctaHref)}', '_blank')" class="featured-btn">Visit Official Site</a></div>
         ${shareButtonsHtml}
         ${relatedPostsHtml}
       </div>
@@ -308,11 +308,11 @@ function renderSearchResults(query) {
     resultsContainer.innerHTML = results.map(p => {
         const { mon, day, year } = formatDateParts(p.date);
         return `
-          <article class=\"post\">
-            <div class=\"datebox\" aria-label=\"Post date\">
-              <div class=\"mon\">${escapeHtml(mon)}</div>
-              <div class=\"day\">${escapeHtml(day)}</div>
-              <div class=\"year\">${escapeHtml(String(year))}</div>
+          <article class="post">
+            <div class="datebox" aria-label="Post date">
+              <div class="mon">${escapeHtml(mon)}</div>
+              <div class="day">${escapeHtml(day)}</div>
+              <div class="year">${escapeHtml(String(year))}</div>
             </div>
             <div>
               <h2><a href="#" onclick="routeTo('post', { id: '${p.id}' });return false;">${escapeHtml(p.title)}</a></h2>
@@ -330,9 +330,9 @@ function renderShareButtons(post) {
     const text = encodeURIComponent(`Check out the rewards for ${post.title}!`);
 
     return `
-    <div class=\"share-widget\">
+    <div class="share-widget">
       <h3>Share These Rewards</h3>
-      <div class=\"share-buttons\">
+      <div class="share-buttons">
         <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" onclick="sharePopup(this.href, 'Facebook'); return false;" class="share-btn facebook" aria-label="Share on Facebook">Facebook</a>
         <a href="https://twitter.com/intent/tweet?url=${encodedUrl}&text=${text}" onclick="sharePopup(this.href, 'Twitter'); return false;" class="share-btn twitter" aria-label="Share on Twitter">Twitter</a>
         <a href="http://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}" onclick="sharePopup(this.href, 'Reddit'); return false;" class="share-btn reddit" aria-label="Share on Reddit">Reddit</a>
@@ -358,9 +358,9 @@ function renderRelatedPosts(currentPost) {
     `).join('');
 
     return `
-        <div class=\"related-posts-widget\">
+        <div class="related-posts-widget">
             <h3>You Might Also Like</h3>
-            <div class=\"related-posts-grid\">${itemsHtml}</div>
+            <div class="related-posts-grid">${itemsHtml}</div>
         </div>
     `;
 }
@@ -399,6 +399,31 @@ function renderSidebar() {
     $('#widget-tags').innerHTML = Array.from(tags).sort().map(tag =>
         `<a href="#" onclick="filterBy('${escapeHtml(tag)}');return false;">${escapeHtml(tag)}</a>`).join('');
 }
+
+// ---------- Visitor Stats ----------
+function updateVisitorStats() {
+    const today = new Date().toDateString();
+    let totalVisits = localStorage.getItem('totalVisits') || 0;
+    let dailyVisits = JSON.parse(localStorage.getItem('dailyVisits')) || {};
+
+    totalVisits = parseInt(totalVisits, 10) + 1;
+    localStorage.setItem('totalVisits', totalVisits);
+
+    if (dailyVisits.date === today) {
+        dailyVisits.count++;
+    } else {
+        dailyVisits = { date: today, count: 1 };
+    }
+    localStorage.setItem('dailyVisits', JSON.stringify(dailyVisits));
+
+    const statsEl = document.getElementById('visitor-stats');
+    if (statsEl) {
+        statsEl.innerHTML = `
+            <span>Today: ${dailyVisits.count}</span> | <span>Total: ${totalVisits}</span>
+        `;
+    }
+}
+
 
 // ---------- Routing / Navigation ----------
 function routeTo(newRoute, params = {}) {
@@ -533,6 +558,7 @@ async function init() {
 
   handleInitialRoute();
   renderSidebar();
+  updateVisitorStats();
 
   window.addEventListener('popstate', handleInitialRoute);
 }
