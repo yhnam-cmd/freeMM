@@ -209,7 +209,13 @@ ul { list-style: none; padding: 0; margin: 0; }
 .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
 .game-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: var(--text); overflow: hidden; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 .game-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 8px 25px rgba(88, 166, 255, 0.15); text-decoration: none; }
-.game-card img { width: 100%; height: 120px; object-fit: cover; border-bottom: 1px solid var(--border); }
+.game-card img {
+  width: 100%;
+  height: 180px; /* Increased height for better image display */
+  object-fit: cover;
+  border-bottom: 1px solid var(--border);
+  background-color: #fff; /* Added a white background for logos */
+}
 .game-card h3 { padding: 14px; font-size: 1rem; font-weight: 600; margin: 0; }
 .search-page-container { margin-bottom: 24px; }
 #search-page-input { width: 100%; padding: 16px 20px; font-size: 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); box-shadow: var(--shadow); }
@@ -246,3 +252,10 @@ ul { list-style: none; padding: 0; margin: 0; }
 .related-post-card:hover { transform: translateY(-3px); border-color: var(--accent); text-decoration: none; }
 .related-post-card img { width: 100%; height: 80px; object-fit: cover; border-bottom: 1px solid var(--border); }
 .related-post-card h4 { padding: 12px; font-size: .9rem; font-weight: 600; margin: 0; text-align: center; }
+
+.visitor-stats { 
+    font-size: 0.8rem; 
+    color: var(--text-light); 
+    text-align: center; 
+    margin-bottom: 10px; 
+}
